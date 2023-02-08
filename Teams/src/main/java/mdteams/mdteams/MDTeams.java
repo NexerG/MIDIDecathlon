@@ -1,4 +1,4 @@
-package mdt.mdt;
+package mdteams.mdteams;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;

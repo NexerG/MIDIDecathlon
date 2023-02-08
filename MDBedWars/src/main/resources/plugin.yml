@@ -1,0 +1,4 @@
+name: MDBedWars
+version: '${project.version}'
+main: mdbedwars.mdbedwars.MDBedWars
+api-version: 1.19

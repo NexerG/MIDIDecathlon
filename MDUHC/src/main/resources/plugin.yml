@@ -1,4 +1,4 @@
-name: MDTeams
+name: MDUHC
 version: '${project.version}'
-main: mdteams.mdteams.MDTeams
+main: mduhc.mduhc.MDUHC
 api-version: 1.19
