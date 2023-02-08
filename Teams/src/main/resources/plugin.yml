@@ -1,0 +1,4 @@
+name: MDTeams
+version: '${project.version}'
+main: mdt.mdt.MDTeams
+api-version: 1.19
