@@ -1,26 +1,25 @@
 package mdteams.mdteams;
 
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.defaults.VersionCommand;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 
-public final class MDTeams extends JavaPlugin
+public final class MDTeams extends JavaPlugin implements TabCompleter
 {
-    private List<Team> Komandos;
-
+    private List<MasterTeamClass> Komandos;
     @Override
     public void onEnable()
     {
         //ChatListener for colored text TODO: setup teams colors
         getServer().getPluginManager().registerEvents(new ChatListener(this),this);
+
         //Teams logic
         //Don't @ me for this shit implementation. Man taip liepe dokumentacija daryt
-        this.getCommand("MDTeam").setExecutor(new TeamCreate());
+        MasterTeamClass komanda=new MasterTeamClass();
+        this.getCommand("Komanda").setExecutor(new CommandManager(komanda));
+        this.getCommand("Komanda").setTabCompleter(new TeamsTabCompleter());
+
         //Komandos = TeamsInitialize();
     }
 
@@ -30,10 +29,9 @@ public final class MDTeams extends JavaPlugin
         //TODO: unload teams
     }
 
-    public List<Team> TeamsInitialize()
+    public List<MasterTeamClass> TeamsInitialize()
     {
         //TODO: implement loading up a json of all teams and their players
-        List<Team> Komandos= null;
         return Komandos;
     }
 }
