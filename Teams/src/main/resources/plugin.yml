@@ -2,3 +2,7 @@ name: MDTeams
 version: '${project.version}'
 main: mdteams.mdteams.MDTeams
 api-version: 1.19
+commands:
+  MDTeam:
+    description: test
+    usage: /<command>
