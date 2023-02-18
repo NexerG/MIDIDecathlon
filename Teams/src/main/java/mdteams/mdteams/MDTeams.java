@@ -15,12 +15,12 @@ public final class MDTeams extends JavaPlugin implements TabCompleter
     @Override
     public void onEnable()
     {
-        //ChatListener for colored text TODO: setup teams colors
-        getServer().getPluginManager().registerEvents(new ChatListener(this), this);
 
         //Teams logic
         //Don't @ me for this shit implementation. Man taip liepe dokumentacija daryt
         MasterTeamClass komanda = new MasterTeamClass();
+        //ChatListener for colored text TODO: setup teams colors
+        getServer().getPluginManager().registerEvents(new ChatListener(komanda), this);
         this.getCommand("Komanda").setExecutor(new CommandManager(komanda));
         this.getCommand("Komanda").setTabCompleter(new TeamsTabCompleter());
         //Komandos = TeamsInitialize();

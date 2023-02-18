@@ -97,9 +97,17 @@ public class MasterTeamClass
 
     }
 
-    public void SetColor()
+    public void SetColor(Player owner, String arg)
     {
-
+        for(int i=0;i<Komandos.size();i++)
+        {
+            if(owner.getName().equalsIgnoreCase(Komandos.get(i).TCreator))
+            {
+                ChatColor dummy = ChatColor.valueOf(arg);
+                Komandos.get(i).SetChatColor(dummy);
+                break;
+            }
+        }
     }
 
 }

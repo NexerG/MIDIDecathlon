@@ -6,14 +6,31 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public class ChatListener implements Listener {
+import java.util.HashMap;
+import java.util.Map;
+
+public class ChatListener extends JavaPlugin implements Listener {
     public static MDTeams plugin;
     public ChatListener(MDTeams instance)
     {
         plugin = instance;
     }
 
+    MasterTeamClass master=null;
+    Map<String,Komanda> PlayerKomandaMap=new HashMap<>();
+    public ChatListener(MasterTeamClass ms)
+    {
+        master=ms;
+        for(int i=0;i<ms.GetKomandos().size();i++)
+        {
+            for(int j=0;j<ms.GetKomandos().get(i).Players.size();j++)
+            {
+                PlayerKomandaMap.put(ms.GetKomandos().get(i).Players.get(j),ms.GetKomandos().get(i));
+            }
+        }
+    }
     @EventHandler
     public void OnPlayerChat(AsyncPlayerChatEvent event)
     {
@@ -22,7 +39,9 @@ public class ChatListener implements Listener {
         String message=event.getMessage();
         Bukkit.broadcastMessage("GG");
 
-        event.setFormat(ChatColor.BLUE + player.getDisplayName()+"§8>>" + ChatColor.WHITE + message);
+        ChatColor spalva=PlayerKomandaMap.get(player.getName()).GetChatColor();
+        Komanda km=PlayerKomandaMap.get(player.getName());
+        event.setFormat(spalva + "<" + km.TName +"> " + ChatColor.WHITE + player.getDisplayName()+"§8>> " + message);
     }
 
 }

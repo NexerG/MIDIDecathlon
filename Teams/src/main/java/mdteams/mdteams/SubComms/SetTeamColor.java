@@ -1,32 +1,33 @@
 package mdteams.mdteams.SubComms;
 
+import mdteams.mdteams.Komanda;
 import mdteams.mdteams.MasterTeamClass;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class AcceptInvite extends SubCommandMaster
+public class SetTeamColor extends SubCommandMaster
 {
-
     @Override
     public String GetName()
     {
-        return "accept";
+        return "color";
     }
 
     @Override
     public String GetDescpription()
     {
-        return "accepts an invite to a team";
+        return "sets the color of the team (in chat)";
     }
 
     @Override
     public String GetSyntax()
     {
-        return "/komanda accept";
+        return "/komanda color <spalva>";
     }
 
     @Override
     public void Perform(Player player, String[] args, MasterTeamClass Komanda)
     {
-        Komanda.AcceptInvite(player);
+        Komanda.SetColor(player, (args[1]));
     }
 }
