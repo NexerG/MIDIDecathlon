@@ -12,7 +12,7 @@ import java.util.Map;
 public class MasterTeamClass
 {
     private static List<Komanda> Komandos = new ArrayList<>();
-    private Map<String,String> PlayerTeaminvite=new HashMap<>();
+    private Map<String,Komanda> PlayerTeaminvite=new HashMap<>();
 
     public static void setKomandos(List<Komanda> komandos)
     {
@@ -43,27 +43,39 @@ public class MasterTeamClass
         Komandos.remove(koma);
     }
 
-    public void InvitePlayer(String arg, Komanda T)
+    public void InvitePlayer(String invitee, Komanda T)
     {
         //TODO: invite player functionality
         List<Player> players= (List<Player>) Bukkit.getOnlinePlayers();
         for(int i=0;i< players.size();i++)
         {
-            if(players.get(i).getName().equalsIgnoreCase(arg))
+            if(players.get(i).getName().equalsIgnoreCase(invitee))
             {
                 Bukkit.getPlayer(players.get(i).getName()).sendMessage(ChatColor.GREEN+"Jūs kviečiamas į komandą: " + T.TName);
             }
         }
-        PlayerTeaminvite.put(arg,T.TName);
+        if(!PlayerTeaminvite.containsKey(invitee))
+            PlayerTeaminvite.put(invitee,T);
+        //TODO: else padaryt kad rodytu jog zmogus jau invited
     }
 
-    public void AcceptInvite()
+    public void AcceptInvite(Player player)
     {
-        //TODO: accept invites
+        if(PlayerTeaminvite.containsKey(player.getName()))
+        {
+            PlayerTeaminvite.get(player.getName()).Players.add(player.getName());
+            player.sendMessage(ChatColor.GREEN + "Jūs prisijungėte į komandą");
+        }
+        else player.sendMessage(ChatColor.RED+"Jūs neturite kvietimų į komandą");
     }
-    public void DeclineInvite()
+    public void DeclineInvite(Player player)
     {
-        //TODO: decline invites
+        if(PlayerTeaminvite.containsKey(player.getName()))
+        {
+            PlayerTeaminvite.remove(player.getName());
+            player.sendMessage(ChatColor.GREEN + "Jūs atmetėte kvietimą");
+        }
+        else player.sendMessage(ChatColor.RED+"Jūs neturite kvietimų į komandą");
     }
 
     public void KickPlayer(String toKick, Komanda koma)

@@ -17,12 +17,12 @@ public class TeamsTabCompleter implements TabCompleter
             List<String> CommandNames=new ArrayList<>();
             CommandNames.add("create");
             CommandNames.add("delete");
-            CommandNames.add("invite NOT FULLY IMPLEMENTED");
+            CommandNames.add("invite");
             CommandNames.add("kick");
             CommandNames.add("list");
             CommandNames.add("color NOT IMPLEMENTED");
-            CommandNames.add("accept NOT IMPLEMENTED");
-            CommandNames.add("decline NOT IMPLEMENTED");
+            CommandNames.add("accept");
+            CommandNames.add("decline");
             return CommandNames;
         }
         return null;
