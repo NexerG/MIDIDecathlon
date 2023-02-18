@@ -6,3 +6,4 @@ commands:
   Komanda:
     description: base Komandu command
     usage: /<command>
+    permission:

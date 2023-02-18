@@ -1,5 +1,6 @@
 package mdteams.mdteams;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,6 +20,7 @@ public class ChatListener implements Listener {
         //TODO: set player name color and add their team name next to their nickname when chatting
         Player player= event.getPlayer();
         String message=event.getMessage();
+        Bukkit.broadcastMessage("GG");
 
         event.setFormat(ChatColor.BLUE + player.getDisplayName()+"§8>>" + ChatColor.WHITE + message);
     }

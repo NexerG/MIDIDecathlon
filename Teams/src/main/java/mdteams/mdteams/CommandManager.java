@@ -1,8 +1,7 @@
 package mdteams.mdteams;
 
-import mdteams.mdteams.SubComms.CreateTeam;
-import mdteams.mdteams.SubComms.KickMember;
-import mdteams.mdteams.SubComms.SubCommandMaster;
+import mdteams.mdteams.SubComms.*;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,6 +24,9 @@ public class CommandManager implements CommandExecutor
         //cia dedamos komandu klases
         subcomms.add(new CreateTeam());
         subcomms.add(new KickMember());
+        subcomms.add(new ListTeams());
+        subcomms.add(new DeleteTeam());
+        subcomms.add(new InvitePlayer());
     }
 
     @Override
@@ -33,13 +35,13 @@ public class CommandManager implements CommandExecutor
         if(sender instanceof Player)
         {
             Player P = (Player) sender;
-            if(args.length>0)
+            if (args.length > 0)
             {
-                for(int i=0;i<GetSubComms().size();i++)
+                for (int i = 0; i < GetSubComms().size(); i++)
                 {
-                    if(args[0].equalsIgnoreCase(GetSubComms().get(i).GetName()))
+                    if (args[0].equalsIgnoreCase(GetSubComms().get(i).GetName()))
                     {
-                        GetSubComms().get(i).Perform(P,args, koma);
+                            GetSubComms().get(i).Perform(P, args, koma);
                     }
                 }
             }
