@@ -15,7 +15,6 @@ public final class MDTeams extends JavaPlugin implements TabCompleter
     @Override
     public void onEnable()
     {
-
         //Teams logic
         //Don't @ me for this shit implementation. Man taip liepe dokumentacija daryt
         MasterTeamClass komanda = new MasterTeamClass();
