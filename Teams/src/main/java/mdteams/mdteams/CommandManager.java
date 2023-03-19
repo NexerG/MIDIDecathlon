@@ -12,7 +12,8 @@ import java.util.ArrayList;
 public class CommandManager implements CommandExecutor
 {
     MasterTeamClass koma;
-    private ArrayList<SubCommandMaster> subcomms=new ArrayList<>();
+    private ArrayList<SubCommandMaster> subcomms = new ArrayList<>();
+
     public ArrayList<SubCommandMaster> GetSubComms()
     {
         return subcomms;
@@ -20,7 +21,7 @@ public class CommandManager implements CommandExecutor
 
     public CommandManager(MasterTeamClass komanda)
     {
-        koma=komanda;
+        koma = komanda;
         //cia dedamos komandu klases
         subcomms.add(new CreateTeam());
         subcomms.add(new KickMember());
@@ -34,7 +35,7 @@ public class CommandManager implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if(sender instanceof Player)
+        if (sender instanceof Player)
         {
             Player P = (Player) sender;
             if (args.length > 0)
@@ -43,7 +44,7 @@ public class CommandManager implements CommandExecutor
                 {
                     if (args[0].equalsIgnoreCase(GetSubComms().get(i).GetName()))
                     {
-                            GetSubComms().get(i).Perform(P, args, koma);
+                        GetSubComms().get(i).Perform(P, args, koma);
                     }
                 }
             }

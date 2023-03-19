@@ -11,37 +11,40 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChatListener extends JavaPlugin implements Listener {
+public class ChatListener extends JavaPlugin implements Listener
+{
     public static MDTeams plugin;
+
     public ChatListener(MDTeams instance)
     {
         plugin = instance;
     }
 
-    MasterTeamClass master=null;
-    Map<String,Komanda> PlayerKomandaMap=new HashMap<>();
+    MasterTeamClass master = null;
+    Map<String, Komanda> PlayerKomandaMap = new HashMap<>();
+
     public ChatListener(MasterTeamClass ms)
     {
-        master=ms;
-        for(int i=0;i<ms.GetKomandos().size();i++)
+        master = ms;
+        for (int i = 0; i < ms.GetKomandos().size(); i++)
         {
-            for(int j=0;j<ms.GetKomandos().get(i).Players.size();j++)
+            for (int j = 0; j < ms.GetKomandos().get(i).Players.size(); j++)
             {
-                PlayerKomandaMap.put(ms.GetKomandos().get(i).Players.get(j),ms.GetKomandos().get(i));
+                PlayerKomandaMap.put(ms.GetKomandos().get(i).Players.get(j), ms.GetKomandos().get(i));
             }
         }
     }
+
     @EventHandler
     public void OnPlayerChat(AsyncPlayerChatEvent event)
     {
         //TODO: set player name color and add their team name next to their nickname when chatting
-        Player player= event.getPlayer();
-        String message=event.getMessage();
+        Player player = event.getPlayer();
+        String message = event.getMessage();
         Bukkit.broadcastMessage("GG");
 
-        ChatColor spalva=PlayerKomandaMap.get(player.getName()).GetChatColor();
-        Komanda km=PlayerKomandaMap.get(player.getName());
-        event.setFormat(spalva + "<" + km.TName +"> " + ChatColor.WHITE + player.getDisplayName()+"§8>> " + message);
+        ChatColor spalva = PlayerKomandaMap.get(player.getName()).GetChatColor();
+        Komanda km = PlayerKomandaMap.get(player.getName());
+        event.setFormat(spalva + "<" + km.TName + "> " + ChatColor.WHITE + player.getDisplayName() + "§8>> " + message);
     }
-
 }
