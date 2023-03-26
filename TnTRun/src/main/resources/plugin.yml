@@ -1,0 +1,9 @@
+name: TnTRun
+version: '${project.version}'
+main: tntrun.tntrun.Tntrun
+api-version: 1.19
+commands:
+  tr:
+    description: tntrun master command
+    usage: /<command>
+    permission:
