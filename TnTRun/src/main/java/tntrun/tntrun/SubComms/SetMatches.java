@@ -26,6 +26,6 @@ public class SetMatches extends SubCommandMaster
     @Override
     public void Perform(Player player, String[] args, Tntrun pr)
     {
-        pr.setMatches(Integer.parseInt(args[0]));
+        pr.setMatches(Integer.parseInt(args[1]));
     }
 }
