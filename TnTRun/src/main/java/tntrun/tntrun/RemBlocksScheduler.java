@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +36,15 @@ public class RemBlocksScheduler
                 {
                     if(pls.get(i).getLocation().getY()<20)
                     {
-                        pls.get(i).teleport(new Location(pls.get(i).getWorld(),100,50,100));
+                        //pls.get(i).teleport(new Location(pls.get(i).getWorld(),100,50,100));
                         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamemode spectator "+ pls.get(i).getName());
-                        parent.Died(pls.get(i));
+                        try
+                        {
+                            parent.Died(pls.get(i));
+                        } catch (FileNotFoundException e)
+                        {
+                            throw new RuntimeException(e);
+                        }
                         --i;
                     }
                 }

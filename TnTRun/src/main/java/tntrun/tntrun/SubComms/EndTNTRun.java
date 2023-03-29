@@ -28,8 +28,6 @@ public class EndTNTRun extends SubCommandMaster
     @Override
     public void Perform(Player player, String[] args, Tntrun pr)
     {
-        //TODO: teleport everyone to the lobby
-        Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamemode adventure @a");
-        //Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "tp to lobby");
+        pr.Over();
     }
 }
