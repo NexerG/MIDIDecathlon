@@ -91,7 +91,7 @@ public final class Tntrun extends JavaPlugin implements Listener
             stopgame();
             //isvedam rez
             PrintWriter out= new PrintWriter("rez_TNT_"+currentRound+".txt");
-            for (int i = positions.get(currentRound).size(); i > 0; i--)
+            for (int i = positions.get(currentRound).size()-1; i >= 0; i--)
             {
                 out.println(positions.get(currentRound).get(i).getName());
                 //Bukkit.getLogger().info(positions.get(currentRound).get(i).getName());

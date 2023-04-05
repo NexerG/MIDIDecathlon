@@ -40,6 +40,7 @@ public class RemBlocksScheduler
                         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamemode spectator "+ pls.get(i).getName());
                         try
                         {
+                            pls.get(i).sendTitle("YOU DIED", "",1,7,3);
                             parent.Died(pls.get(i));
                         } catch (FileNotFoundException e)
                         {
