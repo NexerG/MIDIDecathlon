@@ -3,14 +3,18 @@ package mdteams.mdteams;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MasterTeamClass
+public class MasterTeamClass implements Listener
 {
+    ActivePlayers AP=new ActivePlayers();
     private static List<Komanda> Komandos = new ArrayList<>();
     private Map<String,Komanda> PlayerTeaminvite=new HashMap<>();
 
@@ -40,6 +44,10 @@ public class MasterTeamClass
     public void DeleteTeam(Komanda koma)
     {
         //removing a team
+        for(int i=0;i<koma.Players.size();i++)
+        {
+            AP.LeftTeam(Bukkit.getPlayer(koma.Players.get(i)));
+        }
         Komandos.remove(koma);
     }
 
@@ -65,6 +73,7 @@ public class MasterTeamClass
         {
             PlayerTeaminvite.get(player.getName()).Players.add(player.getName());
             player.sendMessage(ChatColor.GREEN + "Jūs prisijungėte į komandą");
+            AP.JoinedTeam(player);
         }
         else player.sendMessage(ChatColor.RED+"Jūs neturite kvietimų į komandą");
     }
@@ -82,6 +91,7 @@ public class MasterTeamClass
     {
         //TODO: kick a player from the team functionality
         koma.Players.remove(toKick);
+        AP.LeftTeam(Bukkit.getPlayer(toKick));
     }
 
     public void ListTeams(Player player)
@@ -109,5 +119,9 @@ public class MasterTeamClass
             }
         }
     }
-
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent e)
+    {
+        AP.Joined(e.getPlayer());
+    }
 }

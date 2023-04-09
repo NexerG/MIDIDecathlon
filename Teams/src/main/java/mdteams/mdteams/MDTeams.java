@@ -12,12 +12,13 @@ import java.util.List;
 
 public final class MDTeams extends JavaPlugin implements TabCompleter
 {
+    private MasterTeamClass komanda;
     @Override
     public void onEnable()
     {
         //Teams logic
         //Don't @ me for this shit implementation. Man taip liepe dokumentacija daryt
-        MasterTeamClass komanda = new MasterTeamClass();
+        komanda = new MasterTeamClass();
         //ChatListener for colored text TODO: setup teams colors
         getServer().getPluginManager().registerEvents(new ChatListener(komanda), this);
         this.getCommand("Komanda").setExecutor(new CommandManager(komanda));
@@ -30,6 +31,11 @@ public final class MDTeams extends JavaPlugin implements TabCompleter
     {
         // Plugin shutdown logic
         //TODO: unload teams
+    }
+
+    public MasterTeamClass getMasterTeam()
+    {
+        return komanda;
     }
 
     /*public List<MasterTeamClass> TeamsInitialize()

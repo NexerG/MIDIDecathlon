@@ -23,6 +23,16 @@ public class Komanda
         spalva = ChatColor.WHITE;
     }
 
+    public boolean IsInTeam(Player p)
+    {
+        for(int i=0;i<Players.size();i++)
+        {
+            if(p.getName().equalsIgnoreCase(Players.get(i)))
+                return true;
+        }
+        return false;
+    }
+
     public void SetChatColor(ChatColor sp)
     {
         spalva = sp;

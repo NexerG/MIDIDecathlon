@@ -1,0 +1,14 @@
+name: BuildOff
+version: '${project.version}'
+main: buildoff.buildoff.BuildOff
+api-version: 1.19
+depend: [MDTeams]
+softdepend: [MDTeams]
+commands:
+  buildoff:
+    description: buildoff master command
+    usage: /<command>
+  vote:
+    description: used for voting on builds
+    usage: /<command>
+    permission:
