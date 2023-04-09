@@ -50,20 +50,14 @@ public final class BuildOff extends JavaPlugin implements Listener
         {
             for(int j=0;j<komandos.get(i).Players.size();j++)
             {
-                Bukkit.getLogger().info(komandos.get(i).Players.get(j));
-            }
-        }
-        Bukkit.getLogger().info(String.valueOf(komandos.size()));
-
-        for(int i=0;i<komandos.size();i++)
-        {
-            for(int j=0;j<komandos.get(i).Players.size();j++)
-            {
-                //TODO: teleport everybody to their respected plot
-
+                //creative
                 Bukkit.getServer().dispatchCommand(
                         Bukkit.getServer().getConsoleSender()
                         , "gamemode creative "+ komandos.get(i).Players.get(j));
+                //tp to the plot
+                Bukkit.getServer().dispatchCommand(
+                        Bukkit.getServer().getConsoleSender()
+                        , "tp "+ komandos.get(i).Players.get(j)+String.valueOf(i*32+16)+" "+String.valueOf(10)+" "+String.valueOf(16));
             }
         }
     }
@@ -80,7 +74,7 @@ public final class BuildOff extends JavaPlugin implements Listener
             {
                 for(int k=0;k< komandos.get(j).Players.size();k++)
                 {
-                    Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "tp "+komandos.get(j).Players.get(k)+" "+String.valueOf(i*32/2)+" "+String.valueOf(10)+String.valueOf(10));
+                    Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "tp "+komandos.get(j).Players.get(k)+" "+String.valueOf(i*32+16)+" "+String.valueOf(10)+String.valueOf(10));
                 }
             }
 
