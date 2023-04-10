@@ -13,6 +13,8 @@ public class Komanda
     public List<String> Players = new ArrayList<>();
     public List<String> Invites = new ArrayList<>();
 
+    private int Kills=0;
+
     private ChatColor spalva;
 
     public Komanda(String Pavadinimas, String Creator)
@@ -21,6 +23,16 @@ public class Komanda
         this.TCreator = Creator;
         this.Players.add(Creator);
         spalva = ChatColor.WHITE;
+    }
+
+    public void AddKill()
+    {
+        ++Kills;
+    }
+
+    public int GetKills()
+    {
+        return Kills;
     }
 
     public boolean IsInTeam(Player p)

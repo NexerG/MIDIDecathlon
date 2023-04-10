@@ -66,7 +66,7 @@ public final class BuildOff extends JavaPlugin implements Listener
     {
         IsBuildOff=false;
         IsVoting=true;
-        Bukkit.broadcastMessage(ChatColor.BLUE + "15 SECONDS TO VOTE WITH /vote 1-10");
+        /*Bukkit.broadcastMessage(ChatColor.BLUE + "15 SECONDS TO VOTE WITH /vote 1-10");
         for(int i=0;i< komandos.size();i++)
         {
             //TODO: TELEPORT ALL TO VOTE PLACE
@@ -85,7 +85,7 @@ public final class BuildOff extends JavaPlugin implements Listener
             {
                 Thread.currentThread().interrupt();
             }
-        }
+        }*/
     }
     @EventHandler
     public void onBlockPlaced(BlockPlaceEvent e)

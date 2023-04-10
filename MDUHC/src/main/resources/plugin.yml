@@ -2,3 +2,9 @@ name: MDUHC
 version: '${project.version}'
 main: mduhc.mduhc.MDUHC
 api-version: 1.19
+depend: [MDTeams]
+softdepend: [MDTeams]
+commands:
+  uhc:
+    description: uhc master command
+    usage: /<command>
