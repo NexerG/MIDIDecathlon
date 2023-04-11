@@ -1,6 +1,6 @@
-package mduhc.mduhc.SubComms;
+package decathlonmanager.decathlonmanager.SubComms;
 
-import mduhc.mduhc.MDUHC;
+import decathlonmanager.decathlonmanager.DecathlonManager;
 import org.bukkit.entity.Player;
 
 public abstract class SubCommandMaster
@@ -8,5 +8,5 @@ public abstract class SubCommandMaster
     public abstract String GetName();
     public abstract String GetDescpription();
     public abstract String GetSyntax();
-    public abstract  void Perform(Player player, String args[], MDUHC pl);
+    public abstract  void Perform(Player player, String args[], DecathlonManager pl);
 }

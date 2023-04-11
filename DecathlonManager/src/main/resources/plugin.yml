@@ -1,0 +1,11 @@
+name: DecathlonManager
+version: '${project.version}'
+main: decathlonmanager.decathlonmanager.DecathlonManager
+api-version: 1.19
+depend: [MDTeams, TnTRun, BuildOff, MDUHC]
+softdepend: [MDTeams, TNTRun, BuildOff, MDUHC]
+commands:
+  manager:
+    description: manages the Decathlon
+    usage: /<command>
+    permission:
