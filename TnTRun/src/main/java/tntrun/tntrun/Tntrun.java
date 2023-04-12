@@ -52,9 +52,8 @@ public final class Tntrun extends JavaPlugin implements Listener
     public void startgame()
     {
         isPlaying=true;
-        //TODO: clone a world for this tnt run
+        //TODO: clone a world for this tnt run (DO IT IN THE GAME MANAGER PLUGIN)
         //TODO: teleport all valid players to arena
-        //TODO: handle points
         List<Player> RoundPos = new ArrayList<>();
         //TODO: not all players- ONLY active players
         ActiveRoundPlayers = ImmutableList.copyOf(Bukkit.getOnlinePlayers());

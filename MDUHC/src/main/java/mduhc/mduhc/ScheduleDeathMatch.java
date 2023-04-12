@@ -14,7 +14,7 @@ public class ScheduleDeathMatch
     {
         this.plugin = plugin;
         scheduler=plugin.getServer().getScheduler();
-        Bukkit.broadcastMessage(ChatColor.RED + "Arena in 40 minutes");
+        Bukkit.broadcastMessage(ChatColor.RED + "ARENA IN 40 MINUTES");
         scheduler.scheduleSyncDelayedTask(plugin, new Runnable()
         {
             @Override

@@ -54,7 +54,7 @@ public final class MDUHC extends JavaPlugin implements Listener
         {
             for (int j = 0; j < komandos.get(i).Players.size(); j++)
             {
-                //TODO: TP everyone to the UHC world
+                //TODO: TP everyone to the UHC world (DO IT IN THE MANAGER PLUGIN)
                 if (Bukkit.getPlayer(komandos.get(i).Players.get(j)).isOnline())
                 {
                     alivePs.add(Bukkit.getPlayer(komandos.get(i).Players.get(j)));

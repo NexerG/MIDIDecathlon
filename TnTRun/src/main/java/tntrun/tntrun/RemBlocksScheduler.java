@@ -1,6 +1,7 @@
 package tntrun.tntrun;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -25,6 +26,7 @@ public class RemBlocksScheduler
     {
         this.plugin = plugin;
         pls=p;
+        Bukkit.broadcastMessage(ChatColor.BLUE + "BLOCKS START DISSAPEARING IN 10 SECONDS");
         scheduler = plugin.getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(plugin, new Runnable()
         {
@@ -114,6 +116,6 @@ public class RemBlocksScheduler
                 }
 
             }
-        },0L,2L);
+        },200L,2L);
     }
 }

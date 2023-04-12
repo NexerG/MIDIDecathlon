@@ -45,7 +45,8 @@ public final class DecathlonManager extends JavaPlugin
     public void Next(String what)
     {
         //TODO: teleport everybody to the lobby
-        N=new ScheduleNextGame(this,this,what);
+        if(what!="")
+            N=new ScheduleNextGame(this,this,what);
     }
 
     public MDUHC getUhc()
@@ -56,9 +57,12 @@ public final class DecathlonManager extends JavaPlugin
     {
         return buildOff;
     }
-
     public Tntrun getTntrun()
     {
         return tntrun;
+    }
+    public MDTeams getKomandos()
+    {
+        return komandos;
     }
 }
