@@ -26,6 +26,6 @@ public class SchedulerBorderPVP
                 Bukkit.broadcastMessage(ChatColor.RED + "PVP is on. Border is shrinking");
                 dm=new ScheduleDeathMatch(plugin,par);
             }
-        },6000L);
+        },200L); //6000L
     }
 }

@@ -18,6 +18,7 @@ public class ManagerTabsCompleter implements TabCompleter
             List<String> CommandNames = new ArrayList<>();
             CommandNames.add("initiate");
             CommandNames.add("abort");
+            CommandNames.add("gentntworld");
             return CommandNames;
         }
         return null;

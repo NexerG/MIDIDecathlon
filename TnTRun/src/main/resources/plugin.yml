@@ -2,6 +2,8 @@ name: TnTRun
 version: '${project.version}'
 main: tntrun.tntrun.Tntrun
 api-version: 1.19
+depend: [MDTeams]
+softdepend: [MDTeams]
 commands:
   tr:
     description: tntrun master command

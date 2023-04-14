@@ -1,8 +1,8 @@
 package buildoff.buildoff;
 
+import decathlonmanager.decathlonmanager.DecathlonManager;
 import mdteams.mdteams.Komanda;
 import mdteams.mdteams.MDTeams;
-import mdteams.mdteams.MasterTeamClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -10,19 +10,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public final class BuildOff extends JavaPlugin implements Listener
 {
     private boolean IsBuildOff=false;
     private boolean IsVoting=false;
+    private DecathlonManager man;
+
     List<Player> ps=new ArrayList<>();
     List<Komanda> komandos = new ArrayList<>();
 
@@ -54,12 +52,15 @@ public final class BuildOff extends JavaPlugin implements Listener
                 Bukkit.getServer().dispatchCommand(
                         Bukkit.getServer().getConsoleSender()
                         , "gamemode creative "+ komandos.get(i).Players.get(j));
-                //tp to the plot
-                Bukkit.getServer().dispatchCommand(
-                        Bukkit.getServer().getConsoleSender()
-                        , "tp "+ komandos.get(i).Players.get(j)+String.valueOf(i*32+16)+" "+String.valueOf(10)+" "+String.valueOf(16));
             }
         }
+        //TODO:set timer to 30 minutes
+        SchedulerBuild SCB=new SchedulerBuild(this);
+    }
+
+    public boolean isBuildOff()
+    {
+        return IsBuildOff;
     }
 
     public void End()
@@ -86,6 +87,8 @@ public final class BuildOff extends JavaPlugin implements Listener
                 Thread.currentThread().interrupt();
             }
         }*/
+        DecathlonManager man= (DecathlonManager) getServer().getPluginManager().getPlugin("");
+        man.Next("tnt");
     }
     @EventHandler
     public void onBlockPlaced(BlockPlaceEvent e)

@@ -27,5 +27,6 @@ public class Initiate extends SubCommandMaster
     public void Perform(Player player, String[] args, DecathlonManager pl)
     {
         //TODO: DO THE INITIATION
+        pl.decastart();
     }
 }

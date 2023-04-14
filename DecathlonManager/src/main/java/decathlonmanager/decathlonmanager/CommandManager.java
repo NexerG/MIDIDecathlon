@@ -1,5 +1,6 @@
 package decathlonmanager.decathlonmanager;
 
+import decathlonmanager.decathlonmanager.SubComms.GenTNT;
 import decathlonmanager.decathlonmanager.SubComms.Initiate;
 import decathlonmanager.decathlonmanager.SubComms.SubCommandMaster;
 import decathlonmanager.decathlonmanager.SubComms.abort;
@@ -27,6 +28,7 @@ public class CommandManager implements CommandExecutor
         //cia dedamos komandu klases
         subcomms.add(new Initiate());
         subcomms.add(new abort());
+        subcomms.add(new GenTNT());
     }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)

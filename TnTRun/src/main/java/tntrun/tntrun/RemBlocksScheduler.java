@@ -48,7 +48,6 @@ public class RemBlocksScheduler
                         {
                             throw new RuntimeException(e);
                         }
-                        --i;
                     }
                 }
                 //kill block
@@ -67,9 +66,9 @@ public class RemBlocksScheduler
                 {
                     //TODO: more accurate player approximation for better block detection under. usually eats two blocks instead of one
                     Location lcStandart=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()));
-                    Location lcX=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()-1),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()));
-                    Location lcZ=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()-1));
-                    Location lcXZ=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()-1),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()-1));
+                    Location lcX=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()-0.8),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()));
+                    Location lcZ=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()-0.8));
+                    Location lcXZ=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()-0.8),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()-0.8));
                     //TODO: THIS IS FUCKING STUPID WHY CANT I JUST HAVE "STANDING ON THIS [SHIT]" BUT NOOO :((
                     if(!Loc.contains(lcStandart))
                     {

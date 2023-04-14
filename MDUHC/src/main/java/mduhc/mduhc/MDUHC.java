@@ -1,5 +1,6 @@
 package mduhc.mduhc;
 
+import decathlonmanager.decathlonmanager.DecathlonManager;
 import mdteams.mdteams.Komanda;
 import mdteams.mdteams.MDTeams;
 import org.bukkit.Bukkit;
@@ -58,12 +59,11 @@ public final class MDUHC extends JavaPlugin implements Listener
                 if (Bukkit.getPlayer(komandos.get(i).Players.get(j)).isOnline())
                 {
                     alivePs.add(Bukkit.getPlayer(komandos.get(i).Players.get(j)));
+                    //survival
+                    Bukkit.getServer().dispatchCommand(
+                            Bukkit.getServer().getConsoleSender()
+                            , "gamemode survival " + komandos.get(i).Players.get(j));
                 }
-                //survival
-                Bukkit.getServer().dispatchCommand(
-                        Bukkit.getServer().getConsoleSender()
-                        , "gamemode survival " + komandos.get(i).Players.get(j));
-
             }
         }
         Bukkit.getServer().dispatchCommand(
@@ -94,6 +94,8 @@ public final class MDUHC extends JavaPlugin implements Listener
         //TODO: add multiple round support
         GameEnd();
         isUHC=false;
+        DecathlonManager man= (DecathlonManager) getServer().getPluginManager().getPlugin("");
+        man.Next("DecathlonManager");
         //TODO:stop pvp
     }
 

@@ -31,7 +31,8 @@ public class ScheduleNextGame
             //generation args=flat
         }*/
         this.plugin = plugin;
-        Bukkit.broadcastMessage(ChatColor.GREEN+"NEXT GAME IN 5 MINUTES");
+        Bukkit.broadcastMessage(ChatColor.GREEN + "NEXT GAME IN 5 MINUTES");
+        scheduler=plugin.getServer().getScheduler();
         scheduler.scheduleSyncDelayedTask(plugin, new Runnable()
         {
             @Override
@@ -45,21 +46,21 @@ public class ScheduleNextGame
                         {
                             Bukkit.getServer().dispatchCommand(
                                     Bukkit.getServer().getConsoleSender()
-                                    , "mvtp " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " buildoff "+String.valueOf(i*32+16)+" 10"+" 16");
+                                    , "mvtp " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " e:buildoff:"+String.valueOf(i*32+16)+",-59,16");
                         }
                     }
                     man.getBuildOff().start();
                 } else if (what=="tnt")
                 {
-                    for(int i=0;i<man.getKomandos().getMasterTeam().GetKomandos().size();i++)
+                    /*for(int i=0;i<man.getKomandos().getMasterTeam().GetKomandos().size();i++)
                     {
                         for(int j=0;j<man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.size();j++)
                         {
                             Bukkit.getServer().dispatchCommand(
                                     Bukkit.getServer().getConsoleSender()
-                                    , "mvtp " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " tntrun"/*+coordinates*/);
+                                    , "mvtp " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " tntrun");
                         }
-                    }
+                    }*/
                     man.getTntrun().startgame();
                 }
                 else if(what=="uhc")
@@ -76,6 +77,6 @@ public class ScheduleNextGame
                     man.getUhc().start();
                 }
             }
-        },6000L);
+        },100L); //TODO: set delay to 5*60*20=6000 || 6000ticks = 5 minutes
     }
 }

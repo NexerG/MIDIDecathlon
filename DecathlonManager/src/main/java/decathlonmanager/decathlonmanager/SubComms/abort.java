@@ -28,6 +28,6 @@ public class abort extends SubCommandMaster
     public void Perform(Player player, String[] args, DecathlonManager pl)
     {
         pl.flipAbort();
-        player.sendMessage(ChatColor.BLUE+"abort is now set to" +pl.getAbort());
+        player.sendMessage(ChatColor.BLUE+"abort is now set to " +ChatColor.RED+pl.getAbort());
     }
 }
