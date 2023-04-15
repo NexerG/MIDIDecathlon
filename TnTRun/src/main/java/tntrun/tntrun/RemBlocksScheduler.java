@@ -36,13 +36,13 @@ public class RemBlocksScheduler
                 //if player is in play area
                 for(int i=0;i<pls.size();i++)
                 {
-                    if(pls.get(i).getLocation().getY()<20)
+                    if(pls.get(i).getLocation().getY()<20 && !parent.Pos.contains(pls.get(i)))
                     {
                         //pls.get(i).teleport(new Location(pls.get(i).getWorld(),100,50,100));
                         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamemode spectator "+ pls.get(i).getName());
                         try
                         {
-                            pls.get(i).sendTitle("YOU DIED", "",1,7,3);
+                            pls.get(i).sendTitle("YOU DIED", "wait for next round",5,100,5);
                             parent.Died(pls.get(i));
                         } catch (FileNotFoundException e)
                         {
@@ -53,7 +53,7 @@ public class RemBlocksScheduler
                 //kill block
                 for(int i=0;i<Loc.size();i++)
                 {
-                    if(Lifetime.get(i)>5)
+                    if(Lifetime.get(i)>4)
                     {
                         Loc.get(i).getBlock().setType(Material.AIR);
                         Loc.remove(i);
@@ -64,47 +64,49 @@ public class RemBlocksScheduler
                 //game mechanic
                 for(int i=0;i< pls.size();i++)
                 {
-                    //TODO: more accurate player approximation for better block detection under. usually eats two blocks instead of one
-                    Location lcStandart=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()));
-                    Location lcX=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()-0.8),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()));
-                    Location lcZ=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()-0.8));
-                    Location lcXZ=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()-0.8),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()-0.8));
-                    //TODO: THIS IS FUCKING STUPID WHY CANT I JUST HAVE "STANDING ON THIS [SHIT]" BUT NOOO :((
-                    if(!Loc.contains(lcStandart))
+                    if(!pls.get(i).getGameMode().name().equalsIgnoreCase("spectator"))
                     {
-                        if(lcStandart.getBlock().getType()==Material.SANDSTONE)
+                        //TODO: more accurate player approximation for better block detection under. usually eats two blocks instead of one
+                        Location lcStandart=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()));
+                        Location lcX=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()-0.8),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()));
+                        Location lcZ=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()-0.8));
+                        Location lcXZ=new Location(pls.get(i).getWorld(),Math.round(pls.get(i).getLocation().getX()-0.8),pls.get(i).getLocation().getY()-1,Math.round(pls.get(i).getLocation().getZ()-0.8));
+                        //TODO: THIS IS FUCKING STUPID WHY CANT I JUST HAVE "STANDING ON THIS [SHIT]" BUT NOOO :((
+                        if(!Loc.contains(lcStandart))
                         {
-                            lcStandart.getBlock().setType(Material.RED_SANDSTONE);
-                            Loc.add(lcStandart);
-                            Lifetime.add(0);
-                            //Bukkit.getLogger().info(lcStanart.toString());
+                            if(lcStandart.getBlock().getType()==Material.SANDSTONE)
+                            {
+                                lcStandart.getBlock().setType(Material.RED_SANDSTONE);
+                                Loc.add(lcStandart);
+                                Lifetime.add(0);
+                            }
                         }
-                    }
-                    if(!Loc.contains(lcX))
-                    {
-                        if(lcX.getBlock().getType()==Material.SANDSTONE)
+                        if(!Loc.contains(lcX))
                         {
-                            lcX.getBlock().setType(Material.RED_SANDSTONE);
-                            Loc.add(lcX);
-                            Lifetime.add(0);
+                            if(lcX.getBlock().getType()==Material.SANDSTONE)
+                            {
+                                lcX.getBlock().setType(Material.RED_SANDSTONE);
+                                Loc.add(lcX);
+                                Lifetime.add(0);
+                            }
                         }
-                    }
-                    if(!Loc.contains(lcZ))
-                    {
-                        if(lcZ.getBlock().getType()==Material.SANDSTONE)
+                        if(!Loc.contains(lcZ))
                         {
-                            lcZ.getBlock().setType(Material.RED_SANDSTONE);
-                            Loc.add(lcZ);
-                            Lifetime.add(0);
+                            if(lcZ.getBlock().getType()==Material.SANDSTONE)
+                            {
+                                lcZ.getBlock().setType(Material.RED_SANDSTONE);
+                                Loc.add(lcZ);
+                                Lifetime.add(0);
+                            }
                         }
-                    }
-                    if(!Loc.contains(lcXZ))
-                    {
-                        if(lcXZ.getBlock().getType()==Material.SANDSTONE)
+                        if(!Loc.contains(lcXZ))
                         {
-                            lcXZ.getBlock().setType(Material.RED_SANDSTONE);
-                            Loc.add(lcXZ);
-                            Lifetime.add(0);
+                            if(lcXZ.getBlock().getType()==Material.SANDSTONE)
+                            {
+                                lcXZ.getBlock().setType(Material.RED_SANDSTONE);
+                                Loc.add(lcXZ);
+                                Lifetime.add(0);
+                            }
                         }
                     }
                 }

@@ -8,3 +8,4 @@ commands:
   uhc:
     description: uhc master command
     usage: /<command>
+    permission: uhc

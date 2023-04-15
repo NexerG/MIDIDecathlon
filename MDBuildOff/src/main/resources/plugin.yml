@@ -8,7 +8,4 @@ commands:
   buildoff:
     description: buildoff master command
     usage: /<command>
-  vote:
-    description: used for voting on builds
-    usage: /<command>
-    permission:
+    permission: buildoff

@@ -22,10 +22,12 @@ public class SchedulerBorderPVP
             {
                 Bukkit.getServer().dispatchCommand(
                         Bukkit.getServer().getConsoleSender(),"worldborder set 32 2400");
-                //TODO: pvp on
+                Bukkit.getServer().dispatchCommand(
+                        Bukkit.getServer().getConsoleSender()
+                        , "rg flag __global__ pvp allow");
                 Bukkit.broadcastMessage(ChatColor.RED + "PVP is on. Border is shrinking");
                 dm=new ScheduleDeathMatch(plugin,par);
             }
-        },200L); //6000L
+        },6000L); //6000L
     }
 }

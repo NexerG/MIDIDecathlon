@@ -2,8 +2,11 @@ package decathlonmanager.decathlonmanager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
+
+import java.util.List;
 
 public class ScheduleNextGame
 {
@@ -31,6 +34,10 @@ public class ScheduleNextGame
             //generation args=flat
         }*/
         this.plugin = plugin;
+        for(int i=0;i<Bukkit.getOnlinePlayers().size();i++)
+        {
+            ((List<? extends Player>) Bukkit.getOnlinePlayers()).get(i).sendTitle(ChatColor.GREEN+"NEXT GAME IN 5 MINUTES","Next game is: "+what,5,200,5);
+        }
         Bukkit.broadcastMessage(ChatColor.GREEN + "NEXT GAME IN 5 MINUTES");
         scheduler=plugin.getServer().getScheduler();
         scheduler.scheduleSyncDelayedTask(plugin, new Runnable()
@@ -38,7 +45,7 @@ public class ScheduleNextGame
             @Override
             public void run()
             {
-                if(what=="build")
+                if(what=="Buildoff")
                 {
                     for (int i = 0; i < man.getKomandos().getMasterTeam().GetKomandos().size(); i++)
                     {
@@ -50,7 +57,7 @@ public class ScheduleNextGame
                         }
                     }
                     man.getBuildOff().start();
-                } else if (what=="tnt")
+                } else if (what=="TnTRun")
                 {
                     /*for(int i=0;i<man.getKomandos().getMasterTeam().GetKomandos().size();i++)
                     {
@@ -63,7 +70,7 @@ public class ScheduleNextGame
                     }*/
                     man.getTntrun().startgame();
                 }
-                else if(what=="uhc")
+                else if(what=="UHC")
                 {
                     for (int i = 0; i < man.getKomandos().getMasterTeam().GetKomandos().size(); i++)
                     {
@@ -77,6 +84,6 @@ public class ScheduleNextGame
                     man.getUhc().start();
                 }
             }
-        },100L); //TODO: set delay to 5*60*20=6000 || 6000ticks = 5 minutes
+        },6000L); //TODO: set delay to 5*60*20=6000 || 6000ticks = 5 minutes
     }
 }

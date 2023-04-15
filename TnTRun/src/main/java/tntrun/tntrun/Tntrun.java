@@ -20,16 +20,13 @@ import java.util.List;
 public final class Tntrun extends JavaPlugin implements Listener
 {
     private boolean isPlaying=false;
-    private List<List<Player>> positions = new ArrayList<>();
     private List<List<Player>> PlayerCount = new ArrayList<>();
     List<Player> ActiveRoundPlayers=new ArrayList<>();
     private int matches = 3;
     private int currentRound = 0;
     private RemBlocksScheduler match;
 
-    private List<Player> RoundPos1 = new ArrayList<>();
-    private List<Player> RoundPos2 = new ArrayList<>();
-    private List<Player> RoundPos3 = new ArrayList<>();
+    public List<Player> Pos = new ArrayList<>();
     @Override
     public void onEnable()
     {
@@ -37,9 +34,7 @@ public final class Tntrun extends JavaPlugin implements Listener
         this.getCommand("tr").setExecutor(new CommandManager(this));
         this.getCommand("tr").setTabCompleter(new TNTTabsCompleter());
         getServer().getPluginManager().registerEvents(this,this);
-        positions.add(RoundPos1);
-        positions.add(RoundPos2);
-        positions.add(RoundPos3);
+
     }
 
     @Override
@@ -61,9 +56,9 @@ public final class Tntrun extends JavaPlugin implements Listener
     {
         isPlaying=true;
 
-        //TODO: not all players- ONLY active players
         MDTeams tm=(MDTeams) getServer().getPluginManager().getPlugin("MDTeams");
         ActiveRoundPlayers.clear();
+        Pos.clear();
         for(int i=0;i<tm.getMasterTeam().GetKomandos().size();i++)
         {
             for(int j=0;j<tm.getMasterTeam().GetKomandos().get(i).Players.size();j++)
@@ -74,7 +69,6 @@ public final class Tntrun extends JavaPlugin implements Listener
                 }
             }
         }
-        PlayerCount.add(ActiveRoundPlayers);
         MatchInit(ActiveRoundPlayers);
     }
 
@@ -107,15 +101,17 @@ public final class Tntrun extends JavaPlugin implements Listener
 
     public void Died(Player p) throws FileNotFoundException
     {
-        positions.get(currentRound).add(p);
-        if (positions.get(currentRound).size() == PlayerCount.get(currentRound).size())
+        Pos.add(p);
+        if (Pos.size() == ActiveRoundPlayers.size())
         {
+            Bukkit.getLogger().info(String.valueOf(Pos.size()));
+            Bukkit.getLogger().info(String.valueOf(ActiveRoundPlayers.size()));
             stopgame();
             //isvedam rez
             PrintWriter out= new PrintWriter("rez_TNT_"+String.valueOf(currentRound)+".txt");
-            for (int i = positions.get(currentRound).size()-1; i >= 0; i--)
+            for (int i = Pos.size()-1; i >= 0; i--)
             {
-                out.println(positions.get(currentRound).get(i).getName());
+                out.println(Pos.get(i).getName());
             }
             out.close();
             ++currentRound;
@@ -128,6 +124,10 @@ public final class Tntrun extends JavaPlugin implements Listener
             else
             {
                 isPlaying=false;
+                for(int i=0;i<Bukkit.getOnlinePlayers().size();i++)
+                {
+                    ((List<? extends Player>) Bukkit.getOnlinePlayers()).get(i).sendTitle(ChatColor.GREEN+"TNT run OVER!","Back to Lobby",5,200,5);
+                }
                 Bukkit.broadcastMessage(ChatColor.RED +"TNT RUN OVER!!!");
                 Bukkit.broadcastMessage(ChatColor.BLUE +"BACK TO LOBBY");
                 Over();
@@ -139,7 +139,7 @@ public final class Tntrun extends JavaPlugin implements Listener
         //TODO: teleport everyone to the lobby
         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamemode adventure @a");
         DecathlonManager man= (DecathlonManager) getServer().getPluginManager().getPlugin("DecathlonManager");
-        man.Next("uhc");
+        man.Next("UHC");
     }
 
     @EventHandler

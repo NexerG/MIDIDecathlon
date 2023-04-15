@@ -8,4 +8,4 @@ commands:
   manager:
     description: manages the Decathlon
     usage: /<command>
-    permission:
+    permission: manager

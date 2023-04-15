@@ -14,15 +14,23 @@ public class Komanda
     public List<String> Invites = new ArrayList<>();
 
     private int Kills=0;
-
+    private int Points=0;
     private ChatColor spalva;
 
-    public Komanda(String Pavadinimas, String Creator)
+    public Komanda(String Pavadinimas, String Creator, ChatColor clr)
     {
         this.TName = Pavadinimas;
         this.TCreator = Creator;
         this.Players.add(Creator);
-        spalva = ChatColor.WHITE;
+        spalva = clr;
+    }
+    public void addPoints(int pts)
+    {
+        Points=Points+pts;
+    }
+    public int getPoints()
+    {
+        return Points;
     }
 
     public void AddKill()

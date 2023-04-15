@@ -18,7 +18,6 @@ import java.util.List;
 
 public final class MDUHC extends JavaPlugin implements Listener
 {
-
     private boolean isUHC = false;
     private boolean LeftTeams=true;
     List<Komanda> komandos = new ArrayList<>();
@@ -60,9 +59,9 @@ public final class MDUHC extends JavaPlugin implements Listener
                 {
                     alivePs.add(Bukkit.getPlayer(komandos.get(i).Players.get(j)));
                     //survival
-                    Bukkit.getServer().dispatchCommand(
+                    /*Bukkit.getServer().dispatchCommand(
                             Bukkit.getServer().getConsoleSender()
-                            , "gamemode survival " + komandos.get(i).Players.get(j));
+                            , "gamemode survival " + komandos.get(i).Players.get(j));*/
                 }
             }
         }
@@ -78,6 +77,9 @@ public final class MDUHC extends JavaPlugin implements Listener
         for(int i=0;i<alivePs.size();i++)
         {
             //TODO: tp alivers to the arena
+            Bukkit.getServer().dispatchCommand(
+                    Bukkit.getServer().getConsoleSender()
+                    , "mvtp " + alivePs.get(i).getName() + " e:deathmatch:-171,18,274");
         }
     }
 
@@ -94,9 +96,8 @@ public final class MDUHC extends JavaPlugin implements Listener
         //TODO: add multiple round support
         GameEnd();
         isUHC=false;
-        DecathlonManager man= (DecathlonManager) getServer().getPluginManager().getPlugin("");
-        man.Next("DecathlonManager");
-        //TODO:stop pvp
+        DecathlonManager man= (DecathlonManager) getServer().getPluginManager().getPlugin("DecathlonManager");
+        man.Next("");
     }
 
     private void GameEnd()
@@ -104,7 +105,7 @@ public final class MDUHC extends JavaPlugin implements Listener
         try
         {
             PrintWriter out= new PrintWriter("UHCrez.txt");
-            for(int i=0;i<DeathSeq.size();i++)
+            for(int i=DeathSeq.size()-1;i>=0;i--)
             {
                 out.println(DeathSeq.get(i).getName());
             }
@@ -120,27 +121,30 @@ public final class MDUHC extends JavaPlugin implements Listener
     {
         if (isUHC)
         {
-            DeathSeq.add(e.getEntity().getPlayer());
-            alivePs.remove(e.getEntity().getPlayer());
-            for (int i = 0; i < komandos.size(); i++)
+            if(alivePs.contains(e.getEntity().getPlayer()))
             {
-                for (int j = 0; j < komandos.get(i).Players.size(); j++)
+                DeathSeq.add(e.getEntity().getPlayer());
+                alivePs.remove(e.getEntity().getPlayer());
+                for (int i = 0; i < komandos.size(); i++)
                 {
-                    if (e.getEntity().getPlayer() == Bukkit.getPlayer(komandos.get(i).Players.get(j)))
+                    for (int j = 0; j < komandos.get(i).Players.size(); j++)
                     {
-                        //TODO: output player death into txt
-                        for (int k = 0; k < komandos.size(); k++)
+                        if (e.getEntity().getPlayer() == Bukkit.getPlayer(komandos.get(i).Players.get(j)))
                         {
-                            for (int h = 0; h < komandos.get(k).Players.size(); h++)
+                            //output player death into txt
+                            for (int k = 0; k < komandos.size(); k++)
                             {
-                                if (Bukkit.getPlayer(komandos.get(k).Players.get(h)) == e.getEntity().getPlayer().getKiller())
+                                for (int h = 0; h < komandos.get(k).Players.size(); h++)
                                 {
-                                    komandos.get(k).AddKill();
-                                    break;
+                                    if (Bukkit.getPlayer(komandos.get(k).Players.get(h)) == e.getEntity().getPlayer().getKiller())
+                                    {
+                                        komandos.get(k).AddKill();
+                                        break;
+                                    }
                                 }
                             }
+                            break;
                         }
-                        break;
                     }
                 }
             }
@@ -152,12 +156,14 @@ public final class MDUHC extends JavaPlugin implements Listener
                 {
                     for (int j = 0; j < komandos.get(i).Players.size(); j++)
                     {
-                        if (alivePs.get(0) == Bukkit.getPlayer(komandos.get(i).Players.get(j)))
+                        if (alivePs.get(0) == Bukkit.getPlayer(komandos.get(i).Players.get(j)) && dummy==null)
                         {
                             dummy = komandos.get(i);
                             break;
                         }
                     }
+                    if(dummy!=null)
+                        break;
                 }
                 for(int i=1;i<alivePs.size();i++)
                 {

@@ -25,13 +25,13 @@ public class ChatListener implements Listener
     public ChatListener(MasterTeamClass ms)
     {
         master = ms;
-        for (int i = 0; i < ms.GetKomandos().size(); i++)
+        /*for (int i = 0; i < ms.GetKomandos().size(); i++)
         {
             for (int j = 0; j < ms.GetKomandos().get(i).Players.size(); j++)
             {
                 PlayerKomandaMap.put(ms.GetKomandos().get(i).Players.get(j), ms.GetKomandos().get(i));
             }
-        }
+        }*/
     }
 
     @EventHandler
@@ -40,9 +40,18 @@ public class ChatListener implements Listener
         //TODO: set player name color and add their team name next to their nickname when chatting
         Player player = event.getPlayer();
         String message = event.getMessage();
+        ChatColor spalva=ChatColor.WHITE;
 
-        ChatColor spalva = PlayerKomandaMap.get(player.getName()).GetChatColor();
-        Komanda km = PlayerKomandaMap.get(player.getName());
-        event.setFormat(spalva + "<" + km.TName + "> " + ChatColor.WHITE + player.getDisplayName() + "§8>> " + message);
+        for(int i=0;i<master.GetKomandos().size();i++)
+        {
+            for(int j=0;j<master.GetKomandos().get(i).Players.size();j++)
+            {
+                if(player==Bukkit.getPlayer(master.GetKomandos().get(i).Players.get(j)))
+                {
+                    spalva=master.GetKomandos().get(i).GetChatColor();
+                }
+            }
+        }
+        event.setFormat(spalva + "<" + player.getName() + "> " + ChatColor.WHITE + "§8>> " + ChatColor.WHITE + message);
     }
 }

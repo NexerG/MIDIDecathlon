@@ -9,11 +9,14 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public final class BuildOff extends JavaPlugin implements Listener
 {
@@ -52,10 +55,11 @@ public final class BuildOff extends JavaPlugin implements Listener
                 Bukkit.getServer().dispatchCommand(
                         Bukkit.getServer().getConsoleSender()
                         , "gamemode creative "+ komandos.get(i).Players.get(j));
+                Bukkit.getPlayer(komandos.get(i).Players.get(j)).sendTitle(ChatColor.BLUE+"TEMA","30 minutes to build",5,200,10);
             }
         }
         //TODO:set timer to 30 minutes
-        SchedulerBuild SCB=new SchedulerBuild(this);
+        SchedulerBuild SCB=new SchedulerBuild(this,this);
     }
 
     public boolean isBuildOff()
@@ -66,7 +70,7 @@ public final class BuildOff extends JavaPlugin implements Listener
     public void End()
     {
         IsBuildOff=false;
-        IsVoting=true;
+        //IsVoting=true;
         /*Bukkit.broadcastMessage(ChatColor.BLUE + "15 SECONDS TO VOTE WITH /vote 1-10");
         for(int i=0;i< komandos.size();i++)
         {
@@ -87,45 +91,105 @@ public final class BuildOff extends JavaPlugin implements Listener
                 Thread.currentThread().interrupt();
             }
         }*/
-        DecathlonManager man= (DecathlonManager) getServer().getPluginManager().getPlugin("");
-        man.Next("tnt");
+        DecathlonManager man= (DecathlonManager) getServer().getPluginManager().getPlugin("DecathlonManager");
+        man.Next("TnTRun");
     }
     @EventHandler
     public void onBlockPlaced(BlockPlaceEvent e)
     {
         if(IsBuildOff)
         {
-            for(int i=0;i<komandos.size();i++)
+            int indexas=999;
+            if(e.getBlock().getType()!=Material.BEDROCK)
             {
-                for(int j=0;j<komandos.get(i).Players.size();j++)
+                for(int i=0;i<komandos.size();i++)
                 {
-                    if(e.getPlayer().getName().equalsIgnoreCase(komandos.get(i).Players.get(i)))
+                    for(int j=0;j<komandos.get(i).Players.size();j++)
                     {
-                        if(i*32<e.getBlock().getLocation().getBlockX() && (i+1)*32-1>e.getBlock().getLocation().getBlockX())
+                        //block placed
+                        if(e.getPlayer().getName().equalsIgnoreCase(komandos.get(i).Players.get(j)))
                         {
-                            if(0<e.getBlock().getLocation().getBlockZ() && e.getBlock().getLocation().getBlockZ()<32)
-                            {
+                            indexas=i;
+                        }
+                    }
+                }
+                if(indexas*32<e.getBlock().getLocation().getBlockX() && (indexas+1)*32-1>e.getBlock().getLocation().getBlockX())
+                {
+                    if(0<e.getBlock().getLocation().getBlockZ() && e.getBlock().getLocation().getBlockZ()<32)
+                    {
 
-                            }
-                            else
-                            {
-                                e.getBlock().setType(Material.AIR);
-                                e.getPlayer().sendMessage(ChatColor.RED + "INVALID PLACE COORDINATE Z");
-                            }
-                        }
-                        else
-                        {
-                            e.getBlock().setType(Material.AIR);
-                            e.getPlayer().sendMessage(ChatColor.RED +"INVALID PLACE COORDINATE X");
-                        }
                     }
                     else
                     {
-                        e.getBlock().setType(Material.AIR);
-                        e.getPlayer().sendMessage("INVALID PLACE");
+                        e.setCancelled(true);
+                        e.getPlayer().sendMessage(ChatColor.RED + "INVALID PLACE COORDINATE Z");
                     }
                 }
+                else
+                {
+                    e.setCancelled(true);
+                    e.getPlayer().sendMessage(ChatColor.RED +"INVALID PLACE COORDINATE X");
+                }
+
+            }
+            else {
+                e.setCancelled(true);
+                e.getPlayer().sendMessage("CANNOT PLACE OR BREAK BEDROCK");
             }
         }
     }
+    @EventHandler
+    public void onBlockBroken(BlockBreakEvent e)
+    {
+        if(IsBuildOff)
+        {
+            int indexas=999;
+            if(e.getBlock().getType()!=Material.BEDROCK)
+            {
+                for(int i=0;i<komandos.size();i++)
+                {
+                    for(int j=0;j<komandos.get(i).Players.size();j++)
+                    {
+                        //block placed
+                        if(e.getPlayer().getName().equalsIgnoreCase(komandos.get(i).Players.get(j)))
+                        {
+                            indexas=i;
+                        }
+                    }
+                }
+                if(indexas*32<e.getBlock().getLocation().getBlockX() && (indexas+1)*32-1>e.getBlock().getLocation().getBlockX())
+                {
+                    if(0<e.getBlock().getLocation().getBlockZ() && e.getBlock().getLocation().getBlockZ()<32)
+                    {
+
+                    }
+                    else
+                    {
+                        e.setCancelled(true);
+                        e.getPlayer().sendMessage(ChatColor.RED + "INVALID PLACE COORDINATE Z");
+                    }
+                }
+                else
+                {
+                    e.setCancelled(true);
+                    e.getPlayer().sendMessage(ChatColor.RED +"INVALID PLACE COORDINATE X");
+                }
+
+            }
+            else {
+                e.setCancelled(true);
+                e.getPlayer().sendMessage("CANNOT PLACE OR BREAK BEDROCK");
+            }
+        }
+    }
+
+    @EventHandler
+    public void TNTSpawned(ExplosionPrimeEvent e)
+    {
+        if(isBuildOff())
+        {
+            e.setCancelled(true);
+        }
+    }
 }
+

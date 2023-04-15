@@ -8,4 +8,4 @@ commands:
   tr:
     description: tntrun master command
     usage: /<command>
-    permission:
+    permission: tntrun

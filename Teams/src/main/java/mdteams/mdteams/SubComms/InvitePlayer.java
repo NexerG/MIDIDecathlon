@@ -48,16 +48,33 @@ public class InvitePlayer extends SubCommandMaster
                         player.sendMessage(ChatColor.RED + "Toks žaidėjas neprisijungęs prie serverio");
                     }
                 }
-                Komanda T = null;
-                for (int i = 0; i < Komanda.GetKomandos().size(); i++)
+                boolean isInTeam=false;
+                for(int i=0;i<Komanda.GetKomandos().size();i++)
                 {
-                    if (Komanda.GetKomandos().get(i).TCreator.equalsIgnoreCase(player.getName()))
+                    for(int j=0;j<Komanda.GetKomandos().get(i).Players.size();j++)
                     {
-                        T = Komanda.GetKomandos().get(i);
-                        break;
+                        if(Komanda.GetKomandos().get(i).Players.get(j).equalsIgnoreCase(args[1]))
+                        {
+                            isInTeam=true;
+                        }
                     }
                 }
-                Komanda.InvitePlayer(args[1], T);
+                if(!isInTeam)
+                {
+                    Komanda T = null;
+                    for (int i = 0; i < Komanda.GetKomandos().size(); i++)
+                    {
+                        if (Komanda.GetKomandos().get(i).TCreator.equalsIgnoreCase(player.getName()))
+                        {
+                            T = Komanda.GetKomandos().get(i);
+                            break;
+                        }
+                    }
+                    Komanda.InvitePlayer(args[1], T);
+                }
+                else {
+                    player.sendMessage(ChatColor.RED + "Žaidėjas jau turi komandą");
+                }
             } else
                 player.sendMessage(ChatColor.RED + "Negalima kviesti savęs į komandą");
         }

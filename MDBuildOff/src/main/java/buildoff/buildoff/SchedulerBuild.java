@@ -10,10 +10,12 @@ public class SchedulerBuild
 {
     private final JavaPlugin plugin;
     BukkitScheduler scheduler;
+    BuildOff bd;
 
-    public SchedulerBuild(JavaPlugin plugin)
+    public SchedulerBuild(JavaPlugin plugin, BuildOff buildOff)
     {
         this.plugin = plugin;
+        bd=buildOff;
         scheduler=plugin.getServer().getScheduler();
         scheduler.scheduleSyncDelayedTask(plugin, new Runnable()
         {
@@ -22,12 +24,11 @@ public class SchedulerBuild
             {
                 ChangeMode();
             }
-        },300L);//TODO:delay = 30*60*20 = 36000L || 30 min * 60s *20tp/s
+        },36000L);//TODO:delay = 30*60*20 = 36000L || 30 min * 60s *20tp/s
     }
 
     private void ChangeMode()
     {
-        DecathlonManager man= (DecathlonManager) getServer().getPluginManager().getPlugin("DecathlonManager");
-        man.Next("tnt");
+        bd.End();
     }
 }
