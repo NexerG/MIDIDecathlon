@@ -14,8 +14,8 @@ public final class MDTeams extends JavaPlugin implements TabCompleter
         komanda = new MasterTeamClass();
         //ChatListener for colored text TODO: setup teams colors
         getServer().getPluginManager().registerEvents(new ChatListener(komanda), this);
-        this.getCommand("Komanda").setExecutor(new CommandManager(komanda));
-        this.getCommand("Komanda").setTabCompleter(new TeamsTabCompleter());
+        this.getCommand("squad").setExecutor(new CommandManager(komanda));
+        this.getCommand("squad").setTabCompleter(new TeamsTabCompleter());
         //Komandos = TeamsInitialize();
     }
 

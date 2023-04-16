@@ -1,8 +1,6 @@
 package mdteams.mdteams.SubComms;
 
-import mdteams.mdteams.Komanda;
 import mdteams.mdteams.MasterTeamClass;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -17,13 +15,13 @@ public class DeleteTeam extends SubCommandMaster
     @Override
     public String GetDescpription()
     {
-        return "deletes your team";
+        return "deletes your squad";
     }
 
     @Override
     public String GetSyntax()
     {
-        return "/komanda delete";
+        return "/squad delete";
     }
 
     @Override
@@ -34,11 +32,11 @@ public class DeleteTeam extends SubCommandMaster
             if (Komanda.GetKomandos().get(i).TCreator.equalsIgnoreCase(creator.getName()))
             {
                 Komanda.DeleteTeam(Komanda.GetKomandos().get(i));
-                creator.sendMessage(ChatColor.GREEN+"Komanda ištrinta");
+                creator.sendMessage(ChatColor.GREEN+"Squad deleted");
             } else
             {
                 //you are not in a team
-                creator.sendMessage(ChatColor.RED +"Tu nesi komandos savininkas");
+                creator.sendMessage(ChatColor.RED +"You don't own this Squad");
             }
         }
     }

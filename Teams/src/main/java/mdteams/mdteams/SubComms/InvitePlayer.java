@@ -19,13 +19,13 @@ public class InvitePlayer extends SubCommandMaster
     @Override
     public String GetDescpription()
     {
-        return "invites a player to the team";
+        return "invites a player to the squad";
     }
 
     @Override
     public String GetSyntax()
     {
-        return "/komanda invite <player>";
+        return "/squad invite <player>";
     }
 
     @Override
@@ -45,7 +45,7 @@ public class InvitePlayer extends SubCommandMaster
                         break;
                     } else if (i == zaidejai.size() - 1)
                     {
-                        player.sendMessage(ChatColor.RED + "Toks žaidėjas neprisijungęs prie serverio");
+                        player.sendMessage(ChatColor.RED + "This player is offline");
                     }
                 }
                 boolean isInTeam=false;
@@ -73,10 +73,10 @@ public class InvitePlayer extends SubCommandMaster
                     Komanda.InvitePlayer(args[1], T);
                 }
                 else {
-                    player.sendMessage(ChatColor.RED + "Žaidėjas jau turi komandą");
+                    player.sendMessage(ChatColor.RED + "Player is already in a squad");
                 }
             } else
-                player.sendMessage(ChatColor.RED + "Negalima kviesti savęs į komandą");
+                player.sendMessage(ChatColor.RED + "You cannot invite yourself to a squad");
         }
     }
 }

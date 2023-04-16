@@ -81,7 +81,7 @@ public class MasterTeamClass implements Listener
         {
             if(players.get(i).getName().equalsIgnoreCase(invitee))
             {
-                Bukkit.getPlayer(players.get(i).getName()).sendMessage(ChatColor.GREEN+"Jūs kviečiamas į komandą: " + T.TName);
+                Bukkit.getPlayer(players.get(i).getName()).sendMessage(ChatColor.GREEN+"You have been invited to a team: " + T.TName);
             }
         }
         if(!PlayerTeaminvite.containsKey(invitee))
@@ -94,19 +94,19 @@ public class MasterTeamClass implements Listener
         if(PlayerTeaminvite.containsKey(player.getName()))
         {
             PlayerTeaminvite.get(player.getName()).Players.add(player.getName());
-            player.sendMessage(ChatColor.GREEN + "Jūs prisijungėte į komandą");
+            player.sendMessage(ChatColor.GREEN + "You have joined the team");
             AP.JoinedTeam(player);
         }
-        else player.sendMessage(ChatColor.RED+"Jūs neturite kvietimų į komandą");
+        else player.sendMessage(ChatColor.RED+"You have no invites");
     }
     public void DeclineInvite(Player player)
     {
         if(PlayerTeaminvite.containsKey(player.getName()))
         {
             PlayerTeaminvite.remove(player.getName());
-            player.sendMessage(ChatColor.GREEN + "Jūs atmetėte kvietimą");
+            player.sendMessage(ChatColor.GREEN + "You have declined the invite");
         }
-        else player.sendMessage(ChatColor.RED+"Jūs neturite kvietimų į komandą");
+        else player.sendMessage(ChatColor.RED+"You have no invites");
     }
 
     public void KickPlayer(String toKick, Komanda koma)

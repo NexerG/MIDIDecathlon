@@ -15,13 +15,13 @@ public class AcceptInvite extends SubCommandMaster
     @Override
     public String GetDescpription()
     {
-        return "accepts an invite to a team";
+        return "accepts an invite to a squad";
     }
 
     @Override
     public String GetSyntax()
     {
-        return "/komanda accept";
+        return "/squad accept";
     }
 
     @Override

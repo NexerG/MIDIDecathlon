@@ -1,8 +1,6 @@
 package mdteams.mdteams.SubComms;
 
-import mdteams.mdteams.Komanda;
 import mdteams.mdteams.MasterTeamClass;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class ListTeams extends SubCommandMaster
@@ -17,13 +15,13 @@ public class ListTeams extends SubCommandMaster
     @Override
     public String GetDescpription()
     {
-        return "Lists all the teams on the server";
+        return "Lists all the squads on the server";
     }
 
     @Override
     public String GetSyntax()
     {
-        return "/komanda list";
+        return "/squad list";
     }
 
     @Override

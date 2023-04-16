@@ -3,7 +3,7 @@ version: '${project.version}'
 main: mdteams.mdteams.MDTeams
 api-version: 1.19
 commands:
-  Komanda:
-    description: base Komandu command
+  squad:
+    description: base squad command
     usage: /<command>
     permission: komanda

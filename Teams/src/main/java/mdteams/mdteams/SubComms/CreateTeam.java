@@ -1,7 +1,6 @@
 package mdteams.mdteams.SubComms;
 
 import mdteams.mdteams.MasterTeamClass;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -10,19 +9,19 @@ public class CreateTeam extends SubCommandMaster
     @Override
     public String GetName()
     {
-        return "Create";
+        return "create";
     }
 
     @Override
     public String GetDescpription()
     {
-        return "No description";
+        return "creates a squad";
     }
 
     @Override
     public String GetSyntax()
     {
-        return "/Team create <team name>";
+        return "/squad create <name>";
     }
 
     @Override
@@ -38,16 +37,16 @@ public class CreateTeam extends SubCommandMaster
                     if (koma.GetKomandos().get(i).Players.get(j).equalsIgnoreCase(creator.getName()))
                     {
                         isInATeam = true;
-                        creator.sendMessage(ChatColor.RED+"Jau esate komandoje");
+                        creator.sendMessage(ChatColor.RED+"You already have a squad");
                     }
                 }
             }
             if (!isInATeam)
             {
                 koma.CreateTeam(args[1], creator);
-                creator.sendMessage(ChatColor.GREEN+"Sukūrėte komandą pavadinimu " + args[1]);
+                creator.sendMessage(ChatColor.GREEN+"Created a squad named: " + args[1]);
             }
         } else
-            creator.sendMessage( ChatColor.RED +"Neparašėte komdanos pavadinimo");
+            creator.sendMessage( ChatColor.RED +"Didn't specify the name of the squad");
     }
 }

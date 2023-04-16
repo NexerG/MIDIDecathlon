@@ -14,13 +14,13 @@ public class DeclineInvite extends SubCommandMaster
     @Override
     public String GetDescpription()
     {
-        return "declines an invite to a team (if you have one)";
+        return "declines an invite to a squad (if you have one)";
     }
 
     @Override
     public String GetSyntax()
     {
-        return "/komanda decline";
+        return "/squad decline";
     }
 
     @Override
