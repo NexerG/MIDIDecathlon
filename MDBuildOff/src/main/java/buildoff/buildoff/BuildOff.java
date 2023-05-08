@@ -55,7 +55,7 @@ public final class BuildOff extends JavaPlugin implements Listener
                 Bukkit.getServer().dispatchCommand(
                         Bukkit.getServer().getConsoleSender()
                         , "gamemode creative "+ komandos.get(i).Players.get(j));
-                Bukkit.getPlayer(komandos.get(i).Players.get(j)).sendTitle(ChatColor.BLUE+"TEMA","30 minutes to build",5,200,10);
+                Bukkit.getPlayer(komandos.get(i).Players.get(j)).sendTitle(ChatColor.BLUE+"ILIUZIJOS","30 minutes to build",5,200,10);
             }
         }
         //TODO:set timer to 30 minutes

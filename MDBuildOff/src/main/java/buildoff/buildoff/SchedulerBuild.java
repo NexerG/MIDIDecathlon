@@ -1,10 +1,7 @@
 package buildoff.buildoff;
 
-import decathlonmanager.decathlonmanager.DecathlonManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
-
-import static org.bukkit.Bukkit.getServer;
 
 public class SchedulerBuild
 {
