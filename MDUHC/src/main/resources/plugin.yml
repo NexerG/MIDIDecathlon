@@ -1,7 +1,7 @@
 name: MDUHC
 version: '${project.version}'
 main: mduhc.mduhc.MDUHC
-api-version: 1.19
+api-version: 1.20
 depend: [MDTeams]
 softdepend: [MDTeams]
 commands:

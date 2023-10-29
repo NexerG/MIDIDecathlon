@@ -1,0 +1,11 @@
+name: MDTGTTOSAWAF
+version: '${project.version}'
+main: grex.mdtgttosawaf.MDTGTTOSAWAF
+api-version: '1.20'
+depend: [MDTeams]
+softdepend: [MDTeams]
+commands:
+  chicken:
+    description: chicken master command
+    usage: /<command>
+    permission: chicken

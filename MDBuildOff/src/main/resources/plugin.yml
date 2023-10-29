@@ -1,7 +1,7 @@
 name: BuildOff
 version: '${project.version}'
 main: buildoff.buildoff.BuildOff
-api-version: 1.19
+api-version: 1.20
 depend: [MDTeams]
 softdepend: [MDTeams]
 commands:
