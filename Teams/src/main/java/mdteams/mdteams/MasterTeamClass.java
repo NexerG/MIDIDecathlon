@@ -2,13 +2,11 @@ package mdteams.mdteams;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,18 +73,16 @@ public class MasterTeamClass implements Listener
 
     public void InvitePlayer(String invitee, Komanda T)
     {
-        //TODO: invite player functionality
-        List<Player> players= (List<Player>) Bukkit.getOnlinePlayers();
-        for(int i=0;i< players.size();i++)
+        //invited
+        List<Player> players = (List<Player>) Bukkit.getOnlinePlayers();
+        Bukkit.getPlayer(invitee).sendMessage(ChatColor.GREEN + "You have been invited to a team: " + T.TName);
+        if (!PlayerTeaminvite.containsKey(invitee))
+            PlayerTeaminvite.put(invitee, T);
+        else
         {
-            if(players.get(i).getName().equalsIgnoreCase(invitee))
-            {
-                Bukkit.getPlayer(players.get(i).getName()).sendMessage(ChatColor.GREEN+"You have been invited to a team: " + T.TName);
-            }
+            //Jau invited
+            Bukkit.getPlayer(T.TCreator).sendMessage(ChatColor.RED + "PLAYER ALREADY INVITED");
         }
-        if(!PlayerTeaminvite.containsKey(invitee))
-            PlayerTeaminvite.put(invitee,T);
-        //TODO: else padaryt kad rodytu jog zmogus jau invited
     }
 
     public void AcceptInvite(Player player)

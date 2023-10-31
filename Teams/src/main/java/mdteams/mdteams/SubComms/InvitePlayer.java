@@ -73,10 +73,10 @@ public class InvitePlayer extends SubCommandMaster
                     Komanda.InvitePlayer(args[1], T);
                 }
                 else {
-                    player.sendMessage(ChatColor.RED + "Player is already in a squad");
+                    player.sendMessage(ChatColor.RED + "Player is already in a team");
                 }
             } else
-                player.sendMessage(ChatColor.RED + "You cannot invite yourself to a squad");
+                player.sendMessage(ChatColor.RED + "You cannot invite yourself to a team");
         }
     }
 }
