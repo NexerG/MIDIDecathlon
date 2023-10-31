@@ -16,6 +16,7 @@ public class ChickenTabsCompleter implements TabCompleter
             //cia idedami komandu pasiulymai
             List<String> CommandNames=new ArrayList<>();
             CommandNames.add("start");
+            CommandNames.add("end");
             return CommandNames;
         }
         return null;

@@ -27,9 +27,10 @@ public class StartGame extends SubCommandMaster
     @Override
     public void Perform(Player player, String[] args, Tntrun pr)
     {
-        if(pr.getMatches()>0)
+        if (pr.getMatches() > 0)
             pr.startgame();
-        else player.sendMessage(ChatColor.RED+"invalid match count. currently set to: "+pr.getMatches()+". has to be >0");
+        else
+            player.sendMessage(ChatColor.RED + "invalid match count. currently set to: " + pr.getMatches() + ". has to be >0");
         player.sendMessage("issued command");
     }
 }

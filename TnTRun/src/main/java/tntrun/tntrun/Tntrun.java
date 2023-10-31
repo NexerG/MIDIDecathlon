@@ -1,6 +1,5 @@
 package tntrun.tntrun;
 
-import com.google.common.collect.ImmutableList;
 import decathlonmanager.decathlonmanager.DecathlonManager;
 import mdteams.mdteams.MDTeams;
 import org.bukkit.Bukkit;
@@ -8,7 +7,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 

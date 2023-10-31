@@ -1,7 +1,7 @@
 package grex.mdtgttosawaf;
 
-import grex.mdtgttosawaf.SubComms.Start;
-import grex.mdtgttosawaf.SubComms.SubCommandMaster;
+import grex.mdtgttosawaf.SubComms.*;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,27 +21,26 @@ public class CommandManager implements CommandExecutor
 
     public CommandManager(MDTGTTOSAWAF parent)
     {
-        par=parent;
+        par = parent;
         //cia dedamos komandu klases
         subcomms.add(new Start());
+        subcomms.add(new End());
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
+        Bukkit.getLogger().info("chicken command check");
         if (sender instanceof Player)
         {
-            if(command.getName()=="chicken")
+            Player P = (Player) sender;
+            if (args.length > 0)
             {
-                Player P = (Player) sender;
-                if (args.length > 0)
+                for (int i = 0; i < GetSubComms().size(); i++)
                 {
-                    for (int i = 0; i < GetSubComms().size(); i++)
+                    if (args[0].equalsIgnoreCase(GetSubComms().get(i).GetName()))
                     {
-                        if (args[0].equalsIgnoreCase(GetSubComms().get(i).GetName()))
-                        {
-                            GetSubComms().get(i).Perform(P, args, par);
-                        }
+                        GetSubComms().get(i).Perform(P, args, par);
                     }
                 }
             }

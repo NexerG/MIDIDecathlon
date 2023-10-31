@@ -1,6 +1,7 @@
 package decathlonmanager.decathlonmanager;
 
 import buildoff.buildoff.BuildOff;
+import grex.mdtgttosawaf.MDTGTTOSAWAF;
 import mdteams.mdteams.MDTeams;
 import mduhc.mduhc.MDUHC;
 import org.bukkit.Bukkit;
@@ -27,6 +28,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
     private MDUHC uhc;
     private BuildOff buildOff;
     private Tntrun tntrun;
+    private MDTGTTOSAWAF chicken;
 
     private  ScheduleNextGame N;
     private boolean abort=false;
@@ -41,6 +43,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
         uhc= (MDUHC) getServer().getPluginManager().getPlugin("MDUHC");
         buildOff= (BuildOff) getServer().getPluginManager().getPlugin("BuildOff");
         tntrun=(Tntrun) getServer().getPluginManager().getPlugin("TnTRun");
+        chicken=(MDTGTTOSAWAF) getServer().getPluginManager().getPlugin("MDTGTTOSAWAF");
         Bukkit.getServer().dispatchCommand(
                 Bukkit.getServer().getConsoleSender()
                 , "/rg flag __global__ pvp deny");
@@ -289,6 +292,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
     {
         return tntrun;
     }
+    public MDTGTTOSAWAF getChicken(){return  chicken;};
     public MDTeams getKomandos()
     {
         return komandos;
