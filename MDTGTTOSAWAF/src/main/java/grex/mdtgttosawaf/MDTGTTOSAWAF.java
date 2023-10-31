@@ -1,8 +1,10 @@
 package grex.mdtgttosawaf;
 
+import decathlonmanager.decathlonmanager.DecathlonManager;
 import mdteams.mdteams.MDTeams;
 import grex.mdtgttosawaf.SubComms.ChickenTabsCompleter;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -12,6 +14,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +41,7 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
 
     public void start()
     {
+        //TODO: tp players to arena
         TGTTOSAWAF = true;
         MDTeams tm= (MDTeams) getServer().getPluginManager().getPlugin("MDTeams");
         ActiveRoundPlayers.clear();
@@ -53,20 +58,35 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
         }
         match= new RoundTimer(this,this);
     }
-    public void end()
+    public void end() throws FileNotFoundException
     {
-        //TODO: score
+        PrintWriter out= new PrintWriter("rez_TNT_"+String.valueOf(rounds)+".txt");
+        for (int i=Pos.size()-1;i>=0;i--)
+        {
+            out.println(Pos.get(i).getName());
+        }
         rounds--;
-        TGTTOSAWAF=false;
-        if(rounds>0)
+        TGTTOSAWAF = false;
+        if (rounds > 0)
         {
             start();
+        } else
+        {
+            Over();
         }
-        match.scheduler.cancelTasks(this);
+        match.RoundScheduler.cancelTasks(this);
+    }
+    public void Over()
+    {
+        Bukkit.broadcastMessage(ChatColor.RED +"GAMEMODE OVER!!!");
+        Bukkit.broadcastMessage(ChatColor.BLUE +"BACK TO LOBBY");
+        Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamemode adventure @a");
+        DecathlonManager man= (DecathlonManager) getServer().getPluginManager().getPlugin("DecathlonManager");
+        man.Next("TnTRun");
     }
 
     @EventHandler
-    public void onDamage(EntityDamageByEntityEvent e)
+    public void onDamage(EntityDamageByEntityEvent e) throws FileNotFoundException
     {
         if(TGTTOSAWAF)
         {

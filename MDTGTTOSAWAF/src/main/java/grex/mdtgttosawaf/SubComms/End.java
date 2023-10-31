@@ -4,6 +4,8 @@ import grex.mdtgttosawaf.MDTGTTOSAWAF;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.io.FileNotFoundException;
+
 public class End extends SubCommandMaster
 {
 
@@ -28,6 +30,12 @@ public class End extends SubCommandMaster
     @Override
     public void Perform(Player player, String[] args, MDTGTTOSAWAF par)
     {
-        par.end();
+        try
+        {
+            par.end();
+        } catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 }
