@@ -1,7 +1,6 @@
 package grex.mdtgttosawaf.SubComms;
 
 import grex.mdtgttosawaf.MDTGTTOSAWAF;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.io.FileNotFoundException;

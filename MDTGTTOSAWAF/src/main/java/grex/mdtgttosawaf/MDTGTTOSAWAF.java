@@ -60,7 +60,7 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
     }
     public void end() throws FileNotFoundException
     {
-        PrintWriter out= new PrintWriter("rez_TNT_"+String.valueOf(rounds)+".txt");
+        PrintWriter out= new PrintWriter("rez_Chicken"+String.valueOf(rounds)+".txt");
         for (int i=Pos.size()-1;i>=0;i--)
         {
             out.println(Pos.get(i).getName());

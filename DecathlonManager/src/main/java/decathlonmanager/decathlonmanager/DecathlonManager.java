@@ -149,6 +149,22 @@ public final class DecathlonManager extends JavaPlugin implements Listener
             addPts(sc);
             sc.close();
 
+            //pirmas Chicken
+            file=new File("rez_Chicken_3.txt");
+            sc=new Scanner(file);
+            addPts(sc);
+            sc.close();
+            //antras Chicken
+            file=new File("rez_Chicken_2.txt");
+            sc=new Scanner(file);
+            addPts(sc);
+            sc.close();
+            //trecias Chicken
+            file=new File("rez_Chicken_1.txt");
+            sc=new Scanner(file);
+            addPts(sc);
+            sc.close();
+
             //UHC
             file=new File("UHCrez.txt");
             sc=new Scanner(file);
