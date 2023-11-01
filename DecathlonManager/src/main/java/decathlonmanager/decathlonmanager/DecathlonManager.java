@@ -134,60 +134,93 @@ public final class DecathlonManager extends JavaPlugin implements Listener
         try
         {
             //pirmas tnt
-            File file=new File("rez_TNT_0.txt");
-            Scanner sc=new Scanner(file);
+            File file = new File("rez_TNT_0.txt");
+            Scanner sc = new Scanner(file);
             addPts(sc);
             sc.close();
-            //antras tnt
-            file=new File("rez_TNT_1.txt");
-            sc=new Scanner(file);
-            addPts(sc);
-            sc.close();
-            //trecias tnt
-            file=new File("rez_TNT_2.txt");
-            sc=new Scanner(file);
-            addPts(sc);
-            sc.close();
-
-            //pirmas Chicken
-            file=new File("rez_Chicken_3.txt");
-            sc=new Scanner(file);
-            addPts(sc);
-            sc.close();
-            //antras Chicken
-            file=new File("rez_Chicken_2.txt");
-            sc=new Scanner(file);
-            addPts(sc);
-            sc.close();
-            //trecias Chicken
-            file=new File("rez_Chicken_1.txt");
-            sc=new Scanner(file);
-            addPts(sc);
-            sc.close();
-
-            //UHC
-            file=new File("UHCrez.txt");
-            sc=new Scanner(file);
-            addPts(sc);
-            sc.close();
-
-            for(int i=0;i<komandos.getMasterTeam().GetKomandos().size();i++)
-            {
-                komandos.getMasterTeam().GetKomandos().get(i).addPoints(komandos.getMasterTeam().GetKomandos().get(i).GetKills()*2);
-            }
         } catch (FileNotFoundException e)
         {
             throw new RuntimeException(e);
         }
+        try
+        {
+            //antras tnt
+            File file = new File("rez_TNT_1.txt");
+            Scanner sc = new Scanner(file);
+            addPts(sc);
+            sc.close();
+        } catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        try
+        {
+            //trecias tnt
+            File file = new File("rez_TNT_2.txt");
+            Scanner sc = new Scanner(file);
+            addPts(sc);
+            sc.close();
+        } catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        try
+        {
+            //pirmas Chicken
+            File file = new File("rez_Chicken_3.txt");
+            Scanner sc = new Scanner(file);
+            addPts(sc);
+            sc.close();
+        } catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        try
+        {
+            //antras Chicken
+            File file = new File("rez_Chicken_2.txt");
+            Scanner sc = new Scanner(file);
+            addPts(sc);
+            sc.close();
+        } catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        try
+        {
+            //trecias Chicken
+            File file = new File("rez_Chicken_1.txt");
+            Scanner sc = new Scanner(file);
+            addPts(sc);
+            sc.close();
+        } catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        try
+        {
+            //UHC
+            File file = new File("UHCrez.txt");
+            Scanner sc = new Scanner(file);
+            addPts(sc);
+            sc.close();
+        } catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        for (int i = 0; i < komandos.getMasterTeam().GetKomandos().size(); i++)
+        {
+            komandos.getMasterTeam().GetKomandos().get(i).addPoints(komandos.getMasterTeam().GetKomandos().get(i).GetKills() * 2);
+        }
 
         //israsom total taskus
-        PrintWriter out= null;
+        PrintWriter out = null;
         try
         {
             out = new PrintWriter("totalrez.txt");
-            for (int i = 0;i<komandos.getMasterTeam().GetKomandos().size(); i++)
+            for (int i = 0; i < komandos.getMasterTeam().GetKomandos().size(); i++)
             {
-                out.println(komandos.getMasterTeam().GetKomandos().get(i).TName+" "+komandos.getMasterTeam().GetKomandos().get(i).getPoints());
+                out.println(komandos.getMasterTeam().GetKomandos().get(i).TName + " " + komandos.getMasterTeam().GetKomandos().get(i).getPoints());
             }
             out.close();
         } catch (FileNotFoundException e)

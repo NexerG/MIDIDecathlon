@@ -22,7 +22,7 @@ import java.util.List;
 public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
 {
     Boolean TGTTOSAWAF = false;
-    int rounds=1;
+    private int rounds=3;
     List<Player> ActiveRoundPlayers = new ArrayList<>();
     public List<Player> Pos = new ArrayList<>();
     private RoundTimer match;
@@ -83,6 +83,11 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamemode adventure @a");
         DecathlonManager man= (DecathlonManager) getServer().getPluginManager().getPlugin("DecathlonManager");
         man.Next("TnTRun");
+    }
+
+    public void setRounds(int x)
+    {
+        rounds=x;
     }
 
     @EventHandler
