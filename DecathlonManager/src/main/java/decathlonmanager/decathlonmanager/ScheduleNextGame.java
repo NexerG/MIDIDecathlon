@@ -45,9 +45,9 @@ public class ScheduleNextGame
             @Override
             public void run()
             {
-                if(what=="Buildoff")
+                if(what=="Chicken")
                 {
-                    for (int i = 0; i < man.getKomandos().getMasterTeam().GetKomandos().size(); i++)
+                    /*for (int i = 0; i < man.getKomandos().getMasterTeam().GetKomandos().size(); i++)
                     {
                         for (int j = 0; j < man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.size(); j++)
                         {
@@ -55,8 +55,8 @@ public class ScheduleNextGame
                                     Bukkit.getServer().getConsoleSender()
                                     , "mvtp " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " e:buildoff:"+String.valueOf(i*32+16)+",-59,16");
                         }
-                    }
-                    man.getBuildOff().start();
+                    }*/
+                    man.getChicken().start();
                 } else if (what=="TnTRun")
                 {
                     /*for(int i=0;i<man.getKomandos().getMasterTeam().GetKomandos().size();i++)

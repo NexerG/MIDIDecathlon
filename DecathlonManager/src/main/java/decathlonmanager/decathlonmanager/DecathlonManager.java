@@ -76,7 +76,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
                 zaidejai.get(i).sendMessage(ChatColor.RED+"YOU'RE NOT IN A TEAM. PLAYERS WITHOUT A TEAM WILL NOT TAKE PART IN THE TOURNAMENT. /komanda create <name>");
             }
         }
-        Next("Buildoff");
+        Next("Chicken");
     }
 
     public void flipAbort()
