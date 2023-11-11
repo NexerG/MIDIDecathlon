@@ -20,7 +20,7 @@ public class RoundCount extends SubCommandMaster
     @Override
     public String GetSyntax()
     {
-        return "/chicken rounds <number>";
+        return "/chicken round <number>";
     }
 
     @Override

@@ -25,6 +25,7 @@ public class CommandManager implements CommandExecutor
         //cia dedamos komandu klases
         subcomms.add(new Start());
         subcomms.add(new End());
+        subcomms.add(new RoundCount());
     }
 
     @Override

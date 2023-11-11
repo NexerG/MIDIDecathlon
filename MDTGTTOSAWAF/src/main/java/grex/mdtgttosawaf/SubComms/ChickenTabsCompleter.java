@@ -17,6 +17,7 @@ public class ChickenTabsCompleter implements TabCompleter
             List<String> CommandNames=new ArrayList<>();
             CommandNames.add("start");
             CommandNames.add("end");
+            CommandNames.add("round");
             return CommandNames;
         }
         return null;

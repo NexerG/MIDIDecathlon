@@ -21,14 +21,16 @@ import java.util.List;
 
 public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
 {
+    private DecathlonManager man;
     Boolean TGTTOSAWAF = false;
-    private int rounds=3;
+    public int rounds=3;
     List<Player> ActiveRoundPlayers = new ArrayList<>();
     public List<Player> Pos = new ArrayList<>();
     private RoundTimer match;
 
     @Override
     public void onEnable() {
+        man=(DecathlonManager) getServer().getPluginManager().getPlugin("DecathlonManager");
         this.getCommand("chicken").setExecutor(new CommandManager(this));
         this.getCommand("chicken").setTabCompleter(new ChickenTabsCompleter());
         getServer().getPluginManager().registerEvents(this, this);
@@ -56,8 +58,14 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
                 }
             }
         }
-        match= new RoundTimer(this,this);
+        match= new RoundTimer(this,this, man);
     }
+
+    public void teleport()
+    {
+
+    }
+
     public void end() throws FileNotFoundException
     {
         PrintWriter out= new PrintWriter("rez_Chicken"+String.valueOf(rounds)+".txt");
@@ -109,6 +117,10 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
                 }
                 //give points
                 //when all players gone start a new round or stop
+            }
+            if (e.getEntityType() == EntityType.PLAYER)
+            {
+                e.setCancelled(true);
             }
         }
     }
