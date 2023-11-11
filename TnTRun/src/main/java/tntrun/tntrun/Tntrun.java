@@ -78,15 +78,15 @@ public final class Tntrun extends JavaPlugin implements Listener
     private void MatchInit(List<Player> ps)
     {
         List<String> vietos= new ArrayList<>();
-        vietos.add("-2,42,3");
-        vietos.add("-5,42,3");
-        vietos.add("-8,42,3");
-        vietos.add("-11,42,3");
+        vietos.add("-2,72,3");
+        vietos.add("-5,72,3");
+        vietos.add("-8,72,3");
+        vietos.add("-11,72,3");
 
-        vietos.add("-14,42,3");
-        vietos.add("-17,42,3");
-        vietos.add("-20,42,3");
-        vietos.add("-22,42,3");
+        vietos.add("-14,72,3");
+        vietos.add("-17,72,3");
+        vietos.add("-20,72,3");
+        vietos.add("-22,72,3");
         for(int i=0;i<ActiveRoundPlayers.size();i++)
         {
             Bukkit.getServer().dispatchCommand(

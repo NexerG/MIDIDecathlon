@@ -29,13 +29,6 @@ public class GenTNT extends SubCommandMaster
     {
         Bukkit.getServer().dispatchCommand(
                 Bukkit.getServer().getConsoleSender()
-                , "mvdelete tntrun0");
-        Bukkit.getServer().dispatchCommand(
-                Bukkit.getServer().getConsoleSender()
-                , "mvconfirm");
-        //--------//
-        Bukkit.getServer().dispatchCommand(
-                Bukkit.getServer().getConsoleSender()
                 , "mvdelete tntrun1");
         Bukkit.getServer().dispatchCommand(
                 Bukkit.getServer().getConsoleSender()

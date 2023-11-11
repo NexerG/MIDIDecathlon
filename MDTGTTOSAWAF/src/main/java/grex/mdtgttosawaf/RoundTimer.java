@@ -44,6 +44,9 @@ public class RoundTimer
                             , "mvtp " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " badlands");
                 }
             }
+            Bukkit.getServer().dispatchCommand(
+                    Bukkit.getServer().getConsoleSender()
+                    , "execute in minecraft:badlands run fill 12 -37 41 12 -42 20 minecraft:barrier");
         }
 
         PreRoundScheduler = plugin.getServer().getScheduler();
