@@ -238,7 +238,8 @@ public final class DecathlonManager extends JavaPlugin implements Listener
             {
                 for(int j=0;j<komandos.getMasterTeam().GetKomandos().get(i).Players.size();j++)
                 {
-                    if(Bukkit.getPlayer(dum).getName().equalsIgnoreCase(komandos.getMasterTeam().GetKomandos().get(i).Players.get(j)));
+                    Bukkit.getLogger().info(dum);
+                    if(Bukkit.getPlayer(dum.toString()).getName().equalsIgnoreCase(komandos.getMasterTeam().GetKomandos().get(i).Players.get(j).toString()));
                     {
                         if(i<=5)
                             komandos.getMasterTeam().GetKomandos().get(i).addPoints(5);

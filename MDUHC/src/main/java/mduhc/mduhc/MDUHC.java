@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public final class MDUHC extends JavaPlugin implements Listener
 {
@@ -69,7 +70,7 @@ public final class MDUHC extends JavaPlugin implements Listener
             }
         }
         Bukkit.getServer().dispatchCommand(
-                Bukkit.getServer().getConsoleSender(),"worldborder set 500");
+                Bukkit.getServer().getConsoleSender(),"worldborder set 700");
         //TODO:set delay for border shrink and pvp
         match=new SchedulerBorderPVP(this,this);
         Bukkit.broadcastMessage(ChatColor.RED + "PVP on in 5 minutes. Border Shrink in 5 minutes");
@@ -125,28 +126,17 @@ public final class MDUHC extends JavaPlugin implements Listener
     {
         if (isUHC)
         {
-            if(alivePs.contains(e.getEntity().getPlayer()))
+            if (alivePs.contains(e.getEntity().getPlayer()))
             {
                 DeathSeq.add(e.getEntity().getPlayer());
                 alivePs.remove(e.getEntity().getPlayer());
-                for (int i = 0; i < komandos.size(); i++)
+                for (int k = 0; k < komandos.size(); k++)
                 {
-                    for (int j = 0; j < komandos.get(i).Players.size(); j++)
+                    for (int h = 0; h < komandos.get(k).Players.size(); h++)
                     {
-                        if (e.getEntity().getPlayer() == Bukkit.getPlayer(komandos.get(i).Players.get(j)))
+                        if (Bukkit.getPlayer(komandos.get(k).Players.get(h).toString()) == e.getEntity().getPlayer().getKiller())
                         {
-                            //output player death into txt
-                            for (int k = 0; k < komandos.size(); k++)
-                            {
-                                for (int h = 0; h < komandos.get(k).Players.size(); h++)
-                                {
-                                    if (Bukkit.getPlayer(komandos.get(k).Players.get(h)) == e.getEntity().getPlayer().getKiller())
-                                    {
-                                        komandos.get(k).AddKill();
-                                        break;
-                                    }
-                                }
-                            }
+                            komandos.get(k).AddKill();
                             break;
                         }
                     }
@@ -160,7 +150,7 @@ public final class MDUHC extends JavaPlugin implements Listener
                 {
                     for (int j = 0; j < komandos.get(i).Players.size(); j++)
                     {
-                        if (alivePs.get(0) == Bukkit.getPlayer(komandos.get(i).Players.get(j)) && dummy==null)
+                        if (alivePs.get(0) == Bukkit.getPlayer(komandos.get(i).Players.get(j).toString()) && dummy==null)
                         {
                             dummy = komandos.get(i);
                             break;
@@ -175,7 +165,7 @@ public final class MDUHC extends JavaPlugin implements Listener
                     {
                         for(int j=0;j<komandos.get(k).Players.size();j++)
                         {
-                            if(alivePs.get(i)==Bukkit.getPlayer(komandos.get(k).Players.get(j)))
+                            if(alivePs.get(i)==Bukkit.getPlayer(komandos.get(k).Players.get(j).toString()))
                             {
                                 if(komandos.get(k)!=dummy)
                                 {

@@ -102,8 +102,8 @@ public final class Tntrun extends JavaPlugin implements Listener
         Pos.add(p);
         if (Pos.size() == ActiveRoundPlayers.size())
         {
-            Bukkit.getLogger().info(String.valueOf(Pos.size()));
-            Bukkit.getLogger().info(String.valueOf(ActiveRoundPlayers.size()));
+            //Bukkit.getLogger().info(String.valueOf(Pos.size()));
+            //Bukkit.getLogger().info(String.valueOf(ActiveRoundPlayers.size()));
             stopgame();
             //isvedam rez
             PrintWriter out= new PrintWriter("rez_TNT_"+String.valueOf(currentRound)+".txt");

@@ -84,6 +84,6 @@ public class ScheduleNextGame
                     man.getUhc().start();
                 }
             }
-        },6000L); //TODO: set delay to 5*60*20=6000 || 6000ticks = 5 minutes
+        },200L); //TODO: set delay to 5*60*20=6000 || 6000ticks = 5 minutes
     }
 }

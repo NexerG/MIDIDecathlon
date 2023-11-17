@@ -25,9 +25,9 @@ public class SchedulerBorderPVP
                 Bukkit.getServer().dispatchCommand(
                         Bukkit.getServer().getConsoleSender()
                         , "rg flag __global__ pvp allow");
-                Bukkit.broadcastMessage(ChatColor.RED + "PVP is on. Border is shrinking");
+                Bukkit.broadcastMessage(ChatColor.RED + "PVP is on. Border is shrinking. Shrinking until 32 blocks wide in 40 minutes");
                 dm=new ScheduleDeathMatch(plugin,par);
             }
-        },6000L); //6000L
+        },200L); //6000L
     }
 }

@@ -27,6 +27,7 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
     List<Player> ActiveRoundPlayers = new ArrayList<>();
     public List<Player> Pos = new ArrayList<>();
     private RoundTimer match;
+    private DontFall fall;
 
     @Override
     public void onEnable() {
@@ -59,20 +60,24 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
             }
         }
         match= new RoundTimer(this,this, man);
-    }
-
-    public void teleport()
-    {
-
+        fall = new DontFall(this, ActiveRoundPlayers, this);
+        Bukkit.getServer().dispatchCommand(
+                Bukkit.getServer().getConsoleSender()
+                , "rg flag __global__ pvp deny");
     }
 
     public void end() throws FileNotFoundException
     {
+        Bukkit.getServer().dispatchCommand(
+                Bukkit.getServer().getConsoleSender()
+                , "rg flag __global__ pvp deny");
         PrintWriter out= new PrintWriter("rez_Chicken"+String.valueOf(rounds)+".txt");
-        for (int i=Pos.size()-1;i>=0;i--)
+        for(int i = Pos.size()-1; i>=0; i--)
         {
+            Bukkit.getLogger().info(String.valueOf(i));
             out.println(Pos.get(i).getName());
         }
+        out.close();
         rounds--;
         TGTTOSAWAF = false;
         if (rounds > 0)
@@ -83,6 +88,7 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
             Over();
         }
         match.RoundScheduler.cancelTasks(this);
+        fall.scheduler.cancelTasks(this);
     }
     public void Over()
     {
@@ -115,8 +121,6 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
                         end();
                     }
                 }
-                //give points
-                //when all players gone start a new round or stop
             }
             if (e.getEntityType() == EntityType.PLAYER)
             {
