@@ -15,24 +15,6 @@ public class ScheduleNextGame
 
     public ScheduleNextGame(JavaPlugin plugin, DecathlonManager man, String what)
     {
-        /*if(what=="uhc")
-        {
-            //TODO: if "what"=="uhc" then pregen the next world
-            //TODO: next iteration of this plugin. aka next year lmao
-            //generation args=normal
-        }
-        else if(what=="tnt")
-        {
-            //TODO: if "what"=="tnt", then clone tnt world
-            //TODO: next iteration of this plugin. aka next year lmao
-            //generation args=flat
-        }
-        else if(what=="build")
-        {
-            //TODO: if "what"=="build", then generate flat world
-            //TODO: next iteration of this plugin. aka next year lmao
-            //generation args=flat
-        }*/
         this.plugin = plugin;
         for(int i=0;i<Bukkit.getOnlinePlayers().size();i++)
         {

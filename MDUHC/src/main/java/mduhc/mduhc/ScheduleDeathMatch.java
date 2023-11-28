@@ -25,11 +25,11 @@ public class ScheduleDeathMatch
             {
                 dmwarning(par);
             }
-        },timer);
+        },6000);
     }
     public void dmwarning(MDUHC par)
     {
-        Bukkit.broadcastMessage(ChatColor.RED + "ARENA IN "+tOffset.intValue()+" MINUTES");
+        Bukkit.broadcastMessage(ChatColor.RED + "ARENA IN "+(tOffset.intValue()/20/60)+" MINUTES");
         scheduler.scheduleSyncDelayedTask(plugin, new Runnable()
         {
             @Override
