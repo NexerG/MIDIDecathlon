@@ -3,6 +3,9 @@ package grex.mdtgttosawaf;
 import decathlonmanager.decathlonmanager.DecathlonManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
@@ -13,10 +16,15 @@ public class RoundTimer
     private final JavaPlugin plugin;
     BukkitScheduler PreRoundScheduler;
     BukkitScheduler RoundScheduler;
+    BossBar bar = Bukkit.createBossBar(
+            ChatColor.BOLD + "RUN IN 0:25",
+            BarColor.RED,
+            BarStyle.SOLID);
 
     public RoundTimer(JavaPlugin plugin, MDTGTTOSAWAF pr, DecathlonManager man)
     {
         this.plugin = plugin;
+
 
         Bukkit.getServer().dispatchCommand(
                 Bukkit.getServer().getConsoleSender()
@@ -29,67 +37,85 @@ public class RoundTimer
                 Bukkit.getServer().dispatchCommand(
                         Bukkit.getServer().getConsoleSender()
                         , "gamemode adventure " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j));
+                bar.addPlayer(Bukkit.getPlayer(man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j)));
             }
         }
         RoundsSetup(pr, man);
 
         PreRoundScheduler = plugin.getServer().getScheduler();
-        Bukkit.broadcastMessage(ChatColor.BLUE + "Round STARTS IN 10 SECONDS");
+        Bukkit.broadcastMessage(ChatColor.BLUE + "Round STARTS IN 25 SECONDS");
 
-        PreRoundScheduler.scheduleSyncDelayedTask(plugin, new Runnable()
+        PreRoundScheduler.scheduleSyncRepeatingTask(plugin, new Runnable()
         {
+            float timer = 25f;
             @Override
             public void run()
             {
-                for (int i = 0; i < man.getKomandos().getMasterTeam().GetKomandos().size(); i++)
+                bar.setProgress(timer/25f);
+                if(timer <=0)
                 {
-                    for (int j = 0; j < man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.size(); j++)
+                    for (int i = 0; i < man.getKomandos().getMasterTeam().GetKomandos().size(); i++)
                     {
-                        Bukkit.getServer().dispatchCommand(
-                                Bukkit.getServer().getConsoleSender()
-                                , "give " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " minecraft:sandstone 256");
-                        Bukkit.getServer().dispatchCommand(
-                                Bukkit.getServer().getConsoleSender()
-                                , "give " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " minecraft:diamond_pickaxe");
+                        for (int j = 0; j < man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.size(); j++)
+                        {
+                            Bukkit.getServer().dispatchCommand(
+                                    Bukkit.getServer().getConsoleSender()
+                                    , "give " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " minecraft:sandstone 256");
+                            Bukkit.getServer().dispatchCommand(
+                                    Bukkit.getServer().getConsoleSender()
+                                    , "give " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " minecraft:diamond_pickaxe");
+                        }
                     }
-                }
-                RemBarriers(pr);
-                Bukkit.broadcastMessage(ChatColor.RED + "GO! PVP IS ON");
-                Bukkit.getServer().dispatchCommand(
-                        Bukkit.getServer().getConsoleSender()
-                        , "rg flag __global__ pvp allow");
+                    RemBarriers(pr);
+                    Bukkit.broadcastMessage(ChatColor.RED + "GO! PVP IS ON");
+                    Bukkit.getServer().dispatchCommand(
+                            Bukkit.getServer().getConsoleSender()
+                            , "rg flag __global__ pvp allow");
 
-                for (int i = 0; i < man.getKomandos().getMasterTeam().GetKomandos().size(); i++)
-                {
-                    for (int j = 0; j < man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.size(); j++)
+                    for (int i = 0; i < man.getKomandos().getMasterTeam().GetKomandos().size(); i++)
                     {
-                        Bukkit.getServer().dispatchCommand(
-                                Bukkit.getServer().getConsoleSender()
-                                , "gamemode survival " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j));
+                        for (int j = 0; j < man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.size(); j++)
+                        {
+                            Bukkit.getServer().dispatchCommand(
+                                    Bukkit.getServer().getConsoleSender()
+                                    , "gamemode survival " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j));
+                        }
                     }
+                    PreRoundScheduler.cancelTasks(plugin);
                 }
-
-                RT(pr);
+                timer--;
             }
-        }, 200L);
+        }, 0L,20L);
+        RT(pr);
     }
     public void RT(MDTGTTOSAWAF pr)
     {
+        bar.setTitle(ChatColor.BOLD + "END IN 5:00");
+        bar.setColor(BarColor.BLUE);
+
         RoundScheduler=plugin.getServer().getScheduler();
-        RoundScheduler.scheduleSyncDelayedTask(plugin, new Runnable()
+        RoundScheduler.scheduleSyncRepeatingTask(plugin, new Runnable()
         {
+            float timer = 300f;
             @Override
             public void run()
             {
-                try
+                bar.setProgress(timer/300f);
+                bar.setTitle(ChatColor.BOLD + "END IN " + (int)Math.floor(timer/60) + ":" + (int)(timer - (Math.floor(timer/60)*60)));
+                if(timer<=0)
                 {
-                    pr.end();
-                } catch (FileNotFoundException e)
-                {
-                    throw new RuntimeException(e);
+                    try
+                    {
+                        pr.end();
+                    } catch (FileNotFoundException e)
+                    {
+                        throw new RuntimeException(e);
+                    }
+                    RoundScheduler.cancelTasks(pr);
                 }
+                timer--;
             }
-        },6000L);
+        },0L, 20L);
     }
 
     public void RoundsSetup(MDTGTTOSAWAF pr, DecathlonManager man)
