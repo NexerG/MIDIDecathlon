@@ -23,6 +23,7 @@ public final class Tntrun extends JavaPlugin implements Listener
     private int matches = 3;
     private int currentRound = 0;
     private RemBlocksScheduler match;
+    private MDTeams tm;
 
     public List<Player> Pos = new ArrayList<>();
     @Override
@@ -54,7 +55,7 @@ public final class Tntrun extends JavaPlugin implements Listener
     {
         isPlaying=true;
 
-        MDTeams tm=(MDTeams) getServer().getPluginManager().getPlugin("MDTeams");
+        tm=(MDTeams) getServer().getPluginManager().getPlugin("MDTeams");
         ActiveRoundPlayers.clear();
         Pos.clear();
         for(int i=0;i<tm.getMasterTeam().GetKomandos().size();i++)
@@ -78,21 +79,26 @@ public final class Tntrun extends JavaPlugin implements Listener
     private void MatchInit(List<Player> ps)
     {
         List<String> vietos= new ArrayList<>();
-        vietos.add("-2,72,3");
-        vietos.add("-5,72,3");
-        vietos.add("-8,72,3");
-        vietos.add("-11,72,3");
+        vietos.add("-11,117,12");
+        vietos.add("-11,117,71");
+        vietos.add("-11,117,126");
 
-        vietos.add("-14,72,3");
-        vietos.add("-17,72,3");
-        vietos.add("-20,72,3");
-        vietos.add("-22,72,3");
-        for(int i=0;i<ActiveRoundPlayers.size();i++)
+        for(int i=0;i<tm.getMasterTeam().GetKomandos().size();i++)
+        {
+            for(int j=0;j<tm.getMasterTeam().GetKomandos().get(i).Players.size(); j++)
+            {
+                Bukkit.getServer().dispatchCommand(
+                        Bukkit.getServer().getConsoleSender()
+                        , "mvtp " + tm.getMasterTeam().GetKomandos().get(i).Players.get(j) + " e:tntrun"+String.valueOf(currentRound)+":"+vietos.get(j));
+            }
+        }
+
+        /*for(int i=0;i<ActiveRoundPlayers.size();i++)
         {
             Bukkit.getServer().dispatchCommand(
                     Bukkit.getServer().getConsoleSender()
-                    , "mvtp " + ActiveRoundPlayers.get(i).getName() + " e:tntrun"+String.valueOf(currentRound)+":"+vietos.get(i%8));
-        }
+                    , "mvtp " + ActiveRoundPlayers.get(i).getName() + " e:tntrun"+String.valueOf(currentRound)+":"+vietos.get(i%3));
+        }*/
         Bukkit.broadcastMessage(ChatColor.RED + "ROUND START");
         match = new RemBlocksScheduler(this, ps, this);
     }
