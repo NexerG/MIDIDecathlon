@@ -116,13 +116,12 @@ public class MasterTeamClass implements Listener
     {
         for(int i=0;i<GetKomandos().size();i++)
         {
-            player.sendMessage(GetKomandos().get(i).GetChatColor()+ GetKomandos().get(i).TName);
+            player.sendMessage(GetKomandos().get(i).GetChatColor()+ GetKomandos().get(i).TName + " | Points: " + GetKomandos().get(i).getPoints());
             for(int j=0;j<GetKomandos().get(i).Players.size();j++)
             {
                 player.sendMessage("   "+ GetKomandos().get(i).GetChatColor() + GetKomandos().get(i).Players.get(j));
             }
         }
-
     }
 
     public void SetColor(Player owner, String arg)

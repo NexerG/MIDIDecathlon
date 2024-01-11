@@ -37,7 +37,6 @@ public class Komanda
     {
         ++Kills;
     }
-
     public int GetKills()
     {
         return Kills;

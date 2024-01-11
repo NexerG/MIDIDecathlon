@@ -72,7 +72,7 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
                 Bukkit.getServer().getConsoleSender()
                 , "rg flag __global__ pvp deny");
         PrintWriter out= new PrintWriter("rez_Chicken"+String.valueOf(rounds)+".txt");
-        for(int i = Pos.size()-1; i>=0; i--)
+        for(int i = 0; i<= Pos.size()-1; i++)
         {
             Bukkit.getLogger().info(String.valueOf(i));
             out.println(Pos.get(i).getName());

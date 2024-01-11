@@ -76,7 +76,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
                 zaidejai.get(i).sendMessage(ChatColor.RED+"YOU'RE NOT IN A TEAM. PLAYERS WITHOUT A TEAM WILL NOT TAKE PART IN THE TOURNAMENT. /komanda create <name>");
             }
         }
-        Next("Chicken");
+        Next("TnTRun");
     }
 
     public void flipAbort()
@@ -92,6 +92,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
 
     public void Next(String what)
     {
+        CalcPoints();
         Bukkit.getServer().dispatchCommand(
                 Bukkit.getServer().getConsoleSender()
                 , "clear @a");
@@ -131,6 +132,11 @@ public final class DecathlonManager extends JavaPlugin implements Listener
 
     private void CalcPoints()
     {
+        for(int i=0;i<komandos.getMasterTeam().GetKomandos().size();i++)
+        {
+            komandos.getMasterTeam().GetKomandos().get(i).addPoints(-komandos.getMasterTeam().GetKomandos().get(i).getPoints());
+        }
+
         try
         {
             //pirmas tnt
@@ -140,7 +146,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
             sc.close();
         } catch (FileNotFoundException e)
         {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
         try
         {
@@ -151,7 +157,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
             sc.close();
         } catch (FileNotFoundException e)
         {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
         try
         {
@@ -162,7 +168,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
             sc.close();
         } catch (FileNotFoundException e)
         {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
         try
         {
@@ -173,7 +179,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
             sc.close();
         } catch (FileNotFoundException e)
         {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
         try
         {
@@ -184,7 +190,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
             sc.close();
         } catch (FileNotFoundException e)
         {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
         try
         {
@@ -195,7 +201,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
             sc.close();
         } catch (FileNotFoundException e)
         {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
         try
         {
@@ -206,7 +212,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
             sc.close();
         } catch (FileNotFoundException e)
         {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
         for (int i = 0; i < komandos.getMasterTeam().GetKomandos().size(); i++)
         {

@@ -32,16 +32,15 @@ public class ScheduleNextGame
         scheduler=plugin.getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(plugin, new Runnable()
         {
-            float timer = 300f;
+            float timer = 1f;//300f;
             @Override
             public void run()
             {
                 if(timer>60)
-                {
                     bar.setColor(BarColor.BLUE);
-                    bar.setTitle(ChatColor.BOLD + "Time till next game " + (int)Math.floor(timer/60) + ":" + (int)(timer - (Math.floor(timer/60)*60)));
-                }
-                else bar.setColor(BarColor.RED);
+                else
+                    bar.setColor(BarColor.RED);
+                bar.setTitle(ChatColor.BOLD + "Time till next game " + (int)Math.floor(timer/60) + ":" + (int)(timer - (Math.floor(timer/60)*60)));
                 bar.setProgress(timer/300f);
 
                 if(timer <= 0)
