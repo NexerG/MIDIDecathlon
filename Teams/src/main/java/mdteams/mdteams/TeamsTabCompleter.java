@@ -25,6 +25,7 @@ public class TeamsTabCompleter implements TabCompleter
             //CommandNames.add("color");
             CommandNames.add("accept");
             CommandNames.add("decline");
+            CommandNames.add("points");
             return CommandNames;
         }
         return null;

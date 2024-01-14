@@ -29,6 +29,7 @@ public class CommandManager implements CommandExecutor
         subcomms.add(new InvitePlayer());
         subcomms.add(new AcceptInvite());
         subcomms.add(new DeclineInvite());
+        subcomms.add(new TeamPoints());
     }
 
     @Override
