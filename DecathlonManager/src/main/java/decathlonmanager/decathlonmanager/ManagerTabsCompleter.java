@@ -19,6 +19,8 @@ public class ManagerTabsCompleter implements TabCompleter
             CommandNames.add("initiate");
             CommandNames.add("abort");
             CommandNames.add("gentntworld");
+            CommandNames.add("spectator");
+            CommandNames.add("forcespec");
             return CommandNames;
         }
         return null;

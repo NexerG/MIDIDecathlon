@@ -44,7 +44,6 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
 
     public void start()
     {
-        //TODO: tp players to arena
         TGTTOSAWAF = true;
         MDTeams tm= (MDTeams) getServer().getPluginManager().getPlugin("MDTeams");
         ActiveRoundPlayers.clear();

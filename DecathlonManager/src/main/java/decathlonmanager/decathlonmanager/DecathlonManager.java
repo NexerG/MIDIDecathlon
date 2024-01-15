@@ -19,6 +19,7 @@ import tntrun.tntrun.Tntrun;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,6 +31,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
     private Tntrun tntrun;
     private MDTGTTOSAWAF chicken;
 
+    public List<Player> spectators=new ArrayList<>();
     private  ScheduleNextGame N;
     private boolean abort=false;
     @Override

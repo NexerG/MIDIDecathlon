@@ -1,9 +1,6 @@
 package decathlonmanager.decathlonmanager;
 
-import decathlonmanager.decathlonmanager.SubComms.GenTNT;
-import decathlonmanager.decathlonmanager.SubComms.Initiate;
-import decathlonmanager.decathlonmanager.SubComms.SubCommandMaster;
-import decathlonmanager.decathlonmanager.SubComms.abort;
+import decathlonmanager.decathlonmanager.SubComms.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,6 +26,8 @@ public class CommandManager implements CommandExecutor
         subcomms.add(new Initiate());
         subcomms.add(new abort());
         subcomms.add(new GenTNT());
+        subcomms.add(new JoinSpectators());
+        subcomms.add(new ForceSpectator());
     }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)

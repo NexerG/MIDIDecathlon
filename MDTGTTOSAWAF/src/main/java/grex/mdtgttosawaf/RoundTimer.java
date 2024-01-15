@@ -165,6 +165,7 @@ public class RoundTimer
                     Bukkit.getServer().getConsoleSender()
                     , "execute in minecraft:walls run fill 12 -37 41 12 -42 20 minecraft:barrier");
         }
+        TeleportSpectators(man);
     }
 
     public void RemBarriers(MDTGTTOSAWAF pr)
@@ -186,6 +187,19 @@ public class RoundTimer
             Bukkit.getServer().dispatchCommand(
                     Bukkit.getServer().getConsoleSender()
                     , "execute in minecraft:walls run fill 18 -19 58 18 -22 81 minecraft:air");
+        }
+    }
+    private void TeleportSpectators(DecathlonManager man)
+    {
+        for(int i=0;i<man.spectators.size();i++)
+        {
+            Bukkit.getServer().dispatchCommand(
+                    Bukkit.getServer().getConsoleSender()
+                    , "mvtp " + man.spectators.get(i).getName() + " pits");
+            Bukkit.getServer().dispatchCommand(
+                    Bukkit.getServer().getConsoleSender()
+                    , "gamemode spectator " + man.spectators.get(i).getName());
+
         }
     }
 }
