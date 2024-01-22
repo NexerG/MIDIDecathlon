@@ -5,12 +5,19 @@ import mdteams.mdteams.Komanda;
 import mdteams.mdteams.MDTeams;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.loot.LootTable;
+import org.bukkit.loot.LootTables;
+import org.bukkit.loot.Lootable;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -22,12 +29,13 @@ import java.util.Locale;
 public final class MDUHC extends JavaPlugin implements Listener
 {
     private boolean isUHC = false;
-    private boolean isDM=false;
-    private boolean LeftTeams=true;
+    private boolean isDM = false;
+    private boolean LeftTeams = true;
     List<Komanda> komandos = new ArrayList<>();
     List<Player> alivePs = new ArrayList<>();
-    List<Player> DeathSeq=new ArrayList<>();
+    List<Player> DeathSeq = new ArrayList<>();
     private SchedulerBorderPVP match;
+    private List<Location> ChestLocs = new ArrayList<>();
 
     @Override
     public void onEnable()
@@ -35,7 +43,7 @@ public final class MDUHC extends JavaPlugin implements Listener
         // Plugin startup logic
         this.getCommand("uhc").setExecutor(new CommandManager(this));
         this.getCommand("uhc").setTabCompleter(new UHCTabsCompleter());
-        getServer().getPluginManager().registerEvents(this,this);
+        getServer().getPluginManager().registerEvents(this, this);
     }
 
     @Override
@@ -70,16 +78,16 @@ public final class MDUHC extends JavaPlugin implements Listener
             }
         }
         Bukkit.getServer().dispatchCommand(
-                Bukkit.getServer().getConsoleSender(),"worldborder set 700");
+                Bukkit.getServer().getConsoleSender(), "worldborder set 700");
         //TODO:set delay for border shrink and pvp
-        match=new SchedulerBorderPVP(this,this);
+        match = new SchedulerBorderPVP(this, this);
         Bukkit.broadcastMessage(ChatColor.RED + "PVP on in 5 minutes. Border Shrink in 5 minutes");
     }
 
     public void DeathMatch()
     {
-        isDM=true;
-        for(int i=0;i<alivePs.size();i++)
+        isDM = true;
+        for (int i = 0; i < alivePs.size(); i++)
         {
             //TODO: tp alivers to the arena
             Bukkit.getServer().dispatchCommand(
@@ -100,8 +108,8 @@ public final class MDUHC extends JavaPlugin implements Listener
     {
         //TODO: add multiple round support
         GameEnd();
-        isUHC=false;
-        DecathlonManager man= (DecathlonManager) getServer().getPluginManager().getPlugin("DecathlonManager");
+        isUHC = false;
+        DecathlonManager man = (DecathlonManager) getServer().getPluginManager().getPlugin("DecathlonManager");
         man.Next("");
     }
 
@@ -109,8 +117,8 @@ public final class MDUHC extends JavaPlugin implements Listener
     {
         try
         {
-            PrintWriter out= new PrintWriter("UHCrez.txt");
-            for(int i=DeathSeq.size()-1;i>=0;i--)
+            PrintWriter out = new PrintWriter("UHCrez.txt");
+            for (int i = DeathSeq.size() - 1; i >= 0; i--)
             {
                 out.println(DeathSeq.get(i).getName());
             }
@@ -144,38 +152,38 @@ public final class MDUHC extends JavaPlugin implements Listener
             }
             if (alivePs.size() < 4)
             {
-                LeftTeams=false;
+                LeftTeams = false;
                 Komanda dummy = null;
                 for (int i = 0; i < komandos.size(); i++)
                 {
                     for (int j = 0; j < komandos.get(i).Players.size(); j++)
                     {
-                        if (alivePs.get(0) == Bukkit.getPlayer(komandos.get(i).Players.get(j).toString()) && dummy==null)
+                        if (alivePs.get(0) == Bukkit.getPlayer(komandos.get(i).Players.get(j).toString()) && dummy == null)
                         {
                             dummy = komandos.get(i);
                             break;
                         }
                     }
-                    if(dummy!=null)
+                    if (dummy != null)
                         break;
                 }
-                for(int i=1;i<alivePs.size();i++)
+                for (int i = 1; i < alivePs.size(); i++)
                 {
-                    for(int k=0;k<komandos.size();k++)
+                    for (int k = 0; k < komandos.size(); k++)
                     {
-                        for(int j=0;j<komandos.get(k).Players.size();j++)
+                        for (int j = 0; j < komandos.get(k).Players.size(); j++)
                         {
-                            if(alivePs.get(i)==Bukkit.getPlayer(komandos.get(k).Players.get(j).toString()))
+                            if (alivePs.get(i) == Bukkit.getPlayer(komandos.get(k).Players.get(j).toString()))
                             {
-                                if(komandos.get(k)!=dummy)
+                                if (komandos.get(k) != dummy)
                                 {
-                                    LeftTeams=true;
+                                    LeftTeams = true;
                                 }
                             }
                         }
                     }
                 }
-                if(!LeftTeams)
+                if (!LeftTeams)
                 {
                     RoundEnd();
                 }
@@ -186,19 +194,37 @@ public final class MDUHC extends JavaPlugin implements Listener
     @EventHandler
     public void DMBuild(BlockPlaceEvent e)
     {
-        if(isDM)
+        if (isDM)
         {
             e.setCancelled(true);
-            e.getPlayer().sendMessage(ChatColor.RED+ "Cannot build in the Deathmatch");
+            e.getPlayer().sendMessage(ChatColor.RED + "Cannot build in the Deathmatch");
         }
     }
+
     @EventHandler
     public void DMBuild(BlockBreakEvent e)
     {
-        if(isDM)
+        if (isDM)
         {
             e.setCancelled(true);
-            e.getPlayer().sendMessage(ChatColor.RED+ "Cannot mine in the Deathmatch");
+            e.getPlayer().sendMessage(ChatColor.RED + "Cannot mine in the Deathmatch");
         }
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent e)
+    {
+        if (!ChestLocs.contains(e.getClickedBlock().getLocation()))
+            if (e.hasBlock())
+                if (e.getClickedBlock().getType() == Material.CHEST)
+                {
+                    Chest chest = (Chest) e.getClickedBlock().getState();
+                    if (chest instanceof Lootable)
+                    {
+                        chest.setLootTable(LootTables.ANCIENT_CITY.getLootTable());
+                        chest.update();
+                        ChestLocs.add(chest.getLocation());
+                    }
+                }
     }
 }
