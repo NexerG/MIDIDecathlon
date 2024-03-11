@@ -1,0 +1,11 @@
+name: MDLeaderboards
+version: '${project.version}'
+main: org.naosh.mdleaderboards.MDLeaderboards
+api-version: '1.20'
+softdepend: [DecentHolograms, MDTeams]
+depend: [DecentHolograms, MDTeams]
+commands:
+  leaderboards:
+    description: spawn/edit leaderboards
+    usage: /<command>
+    permission: manager

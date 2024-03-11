@@ -1,0 +1,11 @@
+name: MDHungerGames
+version: '${project.version}'
+main: org.naosh.mdhungergames.MDHungerGames
+api-version: '1.20'
+depend: [MDTeams, DecathlonManager]
+softdepend: [MDTeams, DecathlonManager]
+commands:
+  hungergames:
+    description: controls hunger games
+    usage: /<command>
+    permission: manager

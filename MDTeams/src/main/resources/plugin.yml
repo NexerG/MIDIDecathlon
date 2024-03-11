@@ -1,0 +1,9 @@
+name: MDTeams
+version: '${project.version}'
+main: org.naosh.mdteams.MDTeams
+api-version: '1.20'
+commands:
+  squad:
+    description: base squad command
+    usage: /<command>
+    permission: komanda

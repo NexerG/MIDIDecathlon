@@ -1,4 +1,4 @@
 name: MDBedWars
 version: '${project.version}'
-main: mdbedwars.mdbedwars.MDBedWars
-api-version: 1.19
+main: org.naosh.mdbedwars.MDBedWars
+api-version: '1.20'

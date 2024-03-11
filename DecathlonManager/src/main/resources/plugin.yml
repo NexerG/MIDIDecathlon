@@ -1,9 +1,9 @@
 name: DecathlonManager
 version: '${project.version}'
-main: decathlonmanager.decathlonmanager.DecathlonManager
-api-version: 1.20
-depend: [MDTeams, TnTRun, BuildOff, MDUHC]
-softdepend: [MDTeams, TNTRun, BuildOff, MDUHC]
+main: org.naosh.decathlonmanager.DecathlonManager
+api-version: '1.20'
+depend: [MDTeams, MDBuildOff]
+softdepend: [MDTeams, MDBuildOff]
 commands:
   manager:
     description: manages the Decathlon

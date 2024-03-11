@@ -1,0 +1,4 @@
+name: MDParkourRace
+version: '${project.version}'
+main: org.naosh.mdparkourrace.MDParkourRace
+api-version: '1.20'
