@@ -1,6 +1,5 @@
-package org.naosh.mdtgttosawaf;
+package org.naosh.mdparkourrace;
 
-import org.naosh.decathlonmanager.DecathlonManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.boss.BarColor;
@@ -8,6 +7,7 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.naosh.decathlonmanager.DecathlonManager;
 
 import java.io.FileNotFoundException;
 
@@ -21,7 +21,7 @@ public class RoundTimer
             BarColor.RED,
             BarStyle.SOLID);
 
-    public RoundTimer(JavaPlugin plugin, MDTGTTOSAWAF pr, DecathlonManager man)
+    public RoundTimer(JavaPlugin plugin, MDParkourRace pr, DecathlonManager man)
     {
         this.plugin = plugin;
 
@@ -40,54 +40,31 @@ public class RoundTimer
                 bar.addPlayer(Bukkit.getPlayer(man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j)));
             }
         }
-        RoundsSetup(pr, man);
+        //TODO: Barriers
+        //RoundsSetup(pr, man);
 
         PreRoundScheduler = plugin.getServer().getScheduler();
-        Bukkit.broadcastMessage(ChatColor.BLUE + "Round STARTS IN 25 SECONDS");
+        //Bukkit.broadcastMessage(ChatColor.BLUE + "Round STARTS IN 25 SECONDS");
 
         PreRoundScheduler.scheduleSyncRepeatingTask(plugin, new Runnable()
         {
-            float timer = 25f;
+            //TODO: set the timer to 25f for 25 seconds.
+            float timer = 0f;
             @Override
             public void run()
             {
                 bar.setProgress(timer/25f);
                 if(timer <=0)
                 {
-                    for (int i = 0; i < man.getKomandos().getMasterTeam().GetKomandos().size(); i++)
-                    {
-                        for (int j = 0; j < man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.size(); j++)
-                        {
-                            Bukkit.getServer().dispatchCommand(
-                                    Bukkit.getServer().getConsoleSender()
-                                    , "give " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " minecraft:sandstone 256");
-                            Bukkit.getServer().dispatchCommand(
-                                    Bukkit.getServer().getConsoleSender()
-                                    , "give " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " minecraft:diamond_pickaxe");
-                        }
-                    }
-                    RemBarriers(pr);
-                    Bukkit.broadcastMessage(ChatColor.RED + "GO! PVP IS ON");
-                    Bukkit.getServer().dispatchCommand(
-                            Bukkit.getServer().getConsoleSender()
-                            , "rg flag __global__ pvp allow");
-
-                    for (int i = 0; i < man.getKomandos().getMasterTeam().GetKomandos().size(); i++)
-                    {
-                        for (int j = 0; j < man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.size(); j++)
-                        {
-                            Bukkit.getServer().dispatchCommand(
-                                    Bukkit.getServer().getConsoleSender()
-                                    , "gamemode survival " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j));
-                        }
-                    }
+                    //TODO: Barriers
+                    //RemBarriers(pr);
                     RT(pr);
                 }
                 timer--;
             }
         }, 0L,20L);
     }
-    public void RT(MDTGTTOSAWAF pr)
+    public void RT(MDParkourRace pr)
     {
         PreRoundScheduler.cancelTasks(plugin);
 
@@ -105,21 +82,15 @@ public class RoundTimer
                 bar.setTitle(ChatColor.BOLD + "END IN " + (int)Math.floor(timer/60) + ":" + (int)(timer - (Math.floor(timer/60)*60)));
                 if(timer<=0)
                 {
-                    try
-                    {
-                        pr.end();
-                    } catch (FileNotFoundException e)
-                    {
-                        throw new RuntimeException(e);
-                    }
                     RoundScheduler.cancelTasks(pr);
                 }
                 timer--;
             }
         },0L, 20L);
+        pr.end();
     }
 
-    public void RoundsSetup(MDTGTTOSAWAF pr, DecathlonManager man)
+    /*public void RoundsSetup(MDParkourRace pr, DecathlonManager man)
     {
         if(pr.rounds==1)
         {
@@ -167,9 +138,9 @@ public class RoundTimer
                     , "execute in minecraft:walls run fill 12 -37 41 12 -42 20 minecraft:barrier");
         }
         TeleportSpectators(man);
-    }
+    }*/
 
-    public void RemBarriers(MDTGTTOSAWAF pr)
+    /*public void RemBarriers(MDParkourRace pr)
     {
         if(pr.rounds==1)
         {
@@ -189,7 +160,7 @@ public class RoundTimer
                     Bukkit.getServer().getConsoleSender()
                     , "execute in minecraft:walls run fill 18 -19 58 18 -22 81 minecraft:air");
         }
-    }
+    }*/
     private void TeleportSpectators(DecathlonManager man)
     {
         for(int i=0;i<man.spectators.size();i++)

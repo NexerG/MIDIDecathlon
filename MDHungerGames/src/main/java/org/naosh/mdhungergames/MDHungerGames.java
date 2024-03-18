@@ -23,6 +23,7 @@ import java.util.List;
 
 public final class MDHungerGames extends JavaPlugin implements Listener {
     private List<Location> ChestLocs = new ArrayList<>();
+    private DecathlonManager manager;
     private boolean isHG = false;
     private boolean LeftTeams = true;
     List<Komanda> komandos = new ArrayList<>();
@@ -34,7 +35,7 @@ public final class MDHungerGames extends JavaPlugin implements Listener {
         this.getCommand("hungergames").setExecutor(new CommandManager(this));
         this.getCommand("hungergames").setTabCompleter(new HGTabsCompleter());
         getServer().getPluginManager().registerEvents(this, this);
-
+        manager = (DecathlonManager) getServer().getPluginManager().getPlugin("DecathlonManager");
     }
     public boolean getisHG()
     {
@@ -74,8 +75,14 @@ public final class MDHungerGames extends JavaPlugin implements Listener {
             out.close();
         } catch (IOException e)
         {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
+        Over();
+    }
+
+    private void Over()
+    {
+        manager.Next("");
     }
     @Override
     public void onDisable() {
@@ -174,18 +181,22 @@ public final class MDHungerGames extends JavaPlugin implements Listener {
 
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent e) {
-        if (!isHG) {
-            if (!ChestLocs.contains(e.getClickedBlock().getLocation()))
-                if (e.hasBlock())
-                    if (e.getClickedBlock().getType() == Material.CHEST) {
-                        Chest chest = (Chest) e.getClickedBlock().getState();
-                        if (chest instanceof Lootable) {
-                            chest.setLootTable(Bukkit.getLootTable(new NamespacedKey(this, "hgcStart")));
-                            chest.update();
-                            ChestLocs.add(chest.getLocation());
+    public void onInteract(PlayerInteractEvent e)
+    {
+        if (isHG)
+        {
+            if(e.getClickedBlock()!=null)
+                if (!ChestLocs.contains(e.getClickedBlock().getLocation()))
+                    if (e.hasBlock())
+                        if (e.getClickedBlock().getType() == Material.CHEST)
+                        {
+                            Chest chest = (Chest) e.getClickedBlock().getState();
+                            if (chest instanceof Lootable) {
+                                chest.setLootTable(Bukkit.getLootTable(new NamespacedKey(this, "hgcStart")));
+                                chest.update();
+                                ChestLocs.add(chest.getLocation());
+                            }
                         }
-                    }
         }
     }
 }

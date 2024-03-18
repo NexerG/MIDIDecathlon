@@ -14,7 +14,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.naosh.decathlonmanager.DecathlonManager;
-import org.naosh.mdteams.Komanda;
 import org.naosh.mdteams.MDTeams;
 
 import java.io.FileWriter;
@@ -24,12 +23,17 @@ import java.util.List;
 
 public final class MDParkourRace extends JavaPlugin implements Listener {
     private boolean isPlaying=false;
+    public int rounds = 1;
     List<Player> ActiveRoundPlayers=new ArrayList<>();
     private MDTeams tm;
+    private DecathlonManager manager;
+    private RoundTimer match;
     ArrayList<Location> checkpoints = new ArrayList<>();
     @Override
     public void onEnable() {
         // Plugin startup logic
+        this.getCommand("parkour").setExecutor(new CommandManager(this));
+
         checkpoints.add(new Location(Bukkit.getWorld("swagkour"), -738, 4, -768));
         checkpoints.add(new Location(Bukkit.getWorld("swagkour"), -800, 4, -768));
         checkpoints.add(new Location(Bukkit.getWorld("swagkour"), -866, 7, -768));
@@ -37,6 +41,8 @@ public final class MDParkourRace extends JavaPlugin implements Listener {
         checkpoints.add(new Location(Bukkit.getWorld("swagkour"), -994, 13, -770));
         checkpoints.add(new Location(Bukkit.getWorld("swagkour"), -1060, 13, -770));
         getServer().getPluginManager().registerEvents(this,this);
+        manager=(DecathlonManager) getServer().getPluginManager().getPlugin("DecathlonManager");
+
     }
 
     public void startgame()
@@ -60,7 +66,7 @@ public final class MDParkourRace extends JavaPlugin implements Listener {
     private void MatchInit(List<Player> ps)
     {
 
-        for(int i=0;i<tm.getMasterTeam().GetKomandos().size();i++)
+        /*for(int i=0;i<tm.getMasterTeam().GetKomandos().size();i++)
         {
             for(int j=0;j<tm.getMasterTeam().GetKomandos().get(i).Players.size(); j++)
             {
@@ -69,7 +75,7 @@ public final class MDParkourRace extends JavaPlugin implements Listener {
                         , "mvtp " + tm.getMasterTeam().GetKomandos().get(i).Players.get(j) + " e:tntrun:-734,4,-768");
 
             }
-        }
+        }*/
 
         /*for(int i=0;i<ActiveRoundPlayers.size();i++)
         {
@@ -78,7 +84,7 @@ public final class MDParkourRace extends JavaPlugin implements Listener {
                     , "mvtp " + ActiveRoundPlayers.get(i).getName() + " e:tntrun"+String.valueOf(currentRound)+":"+vietos.get(i%3));
         }*/
         Bukkit.broadcastMessage(ChatColor.RED + "ROUND START");
-        //match = new RemBlocksScheduler(this, ps, this);
+        match = new RoundTimer(this, this, manager);
     }
 
     @Override
@@ -87,10 +93,21 @@ public final class MDParkourRace extends JavaPlugin implements Listener {
     }
     public void Over()
     {
+        Bukkit.getLogger().info("tavo mama");
         //TODO: teleport everyone to the lobby
         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamemode adventure @a");
         DecathlonManager man= (DecathlonManager) getServer().getPluginManager().getPlugin("DecathlonManager");
         man.Next("HG");
+    }
+    public void end()
+    {
+        match.bar.removeAll();
+        match.RoundScheduler.cancelTasks(this);
+        rounds--;
+        if(rounds <= 0)
+        {
+            Over();
+        }
     }
 
     @EventHandler

@@ -1,6 +1,5 @@
 package org.naosh.mdleaderboards;
 
-import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.holograms.Hologram;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

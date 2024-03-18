@@ -23,6 +23,8 @@ public class CommandManager implements CommandExecutor
         pr=parent;
         //cia dedamos komandu klases
         subcomms.add(new StartGame());
+        subcomms.add(new GetPositions());
+        subcomms.add(new EndGame());
     }
 
     @Override

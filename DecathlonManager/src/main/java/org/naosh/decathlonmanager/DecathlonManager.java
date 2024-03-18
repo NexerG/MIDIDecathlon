@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 import org.naosh.mdbuildoff.MDBuildOff;
 import org.naosh.mdhungergames.MDHungerGames;
 import org.naosh.mdleaderboards.MDLeaderboards;
+import org.naosh.mdparkourrace.MDParkourRace;
 import org.naosh.mdteams.MDTeams;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -27,14 +28,13 @@ import java.util.Scanner;
 
 public final class DecathlonManager extends JavaPlugin implements Listener
 {
-
     private MDTeams komandos;
     private MDBuildOff buildOff;
     private MDTGTTOSAWAF chicken;
     private MDHungerGames hg;
     private MDLeaderboards leaderboards;
 
-
+    private MDParkourRace parkour;
     public List<Player> spectators=new ArrayList<>();
     private  ScheduleNextGame N;
     private Plugin tmp;
@@ -43,20 +43,17 @@ public final class DecathlonManager extends JavaPlugin implements Listener
     public void onEnable()
     {
         // Plugin startup logic
-
-
         this.getCommand("manager").setExecutor(new CommandManager(this));
         this.getCommand("manager").setTabCompleter(new ManagerTabsCompleter());
         getServer().getPluginManager().registerEvents(this, this);
-        Bukkit.getLogger().info(getServer().getPluginManager().getPlugin("MDTeams").getClass().toString());
+        //Bukkit.getLogger().info(getServer().getPluginManager().getPlugin("MDTeams").getClass().toString());
         komandos = (MDTeams) getServer().getPluginManager().getPlugin("MDTeams");
         hg= (MDHungerGames) getServer().getPluginManager().getPlugin("MDHungerGames");
         buildOff= (MDBuildOff) getServer().getPluginManager().getPlugin("BuildOff");
         leaderboards = (MDLeaderboards) getServer().getPluginManager().getPlugin("MDLeaderboards");
         chicken=(MDTGTTOSAWAF) getServer().getPluginManager().getPlugin("MDTGTTOSAWAF");
-        Bukkit.getServer().dispatchCommand(
-                Bukkit.getServer().getConsoleSender()
-                , "/rg flag __global__ pvp deny");
+        parkour = (MDParkourRace) getServer().getPluginManager().getPlugin("MDParkourRace");
+
     }
 
     @Override
@@ -86,7 +83,7 @@ public final class DecathlonManager extends JavaPlugin implements Listener
                 zaidejai.get(i).sendMessage(ChatColor.RED+"YOU'RE NOT IN A TEAM. PLAYERS WITHOUT A TEAM WILL NOT TAKE PART IN THE TOURNAMENT. /komanda create <name>");
             }
         }
-        Next("TnTRun");
+        Next("Chicken");
     }
 
     public void flipAbort()
@@ -364,4 +361,5 @@ public final class DecathlonManager extends JavaPlugin implements Listener
         return komandos;
     }
 
+    public MDParkourRace getParkour(){return parkour;}
 }

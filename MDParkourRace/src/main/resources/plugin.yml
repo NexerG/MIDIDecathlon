@@ -2,3 +2,8 @@ name: MDParkourRace
 version: '${project.version}'
 main: org.naosh.mdparkourrace.MDParkourRace
 api-version: '1.20'
+commands:
+  parkour:
+    description: for Parkour Plugin debug purposes
+    usage: /<command>
+    permission: parkour

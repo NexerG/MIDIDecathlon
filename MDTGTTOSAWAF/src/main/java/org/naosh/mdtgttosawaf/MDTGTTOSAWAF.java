@@ -1,5 +1,6 @@
 package org.naosh.mdtgttosawaf;
 
+import org.bukkit.boss.BossBar;
 import org.naosh.decathlonmanager.DecathlonManager;
 import org.naosh.mdtgttosawaf.SubComms.ChickenTabsCompleter;
 import org.naosh.mdteams.MDTeams;
@@ -85,6 +86,7 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
         {
             Over();
         }
+        match.bar.removeAll();
         match.RoundScheduler.cancelTasks(this);
         fall.scheduler.cancelTasks(this);
     }
@@ -94,7 +96,7 @@ public final class MDTGTTOSAWAF extends JavaPlugin implements Listener
         Bukkit.broadcastMessage(ChatColor.BLUE +"BACK TO LOBBY");
         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamemode adventure @a");
         DecathlonManager man= (DecathlonManager) getServer().getPluginManager().getPlugin("DecathlonManager");
-        man.Next("TnTRun");
+        man.Next("Parkour");
     }
 
     public void setRounds(int x)

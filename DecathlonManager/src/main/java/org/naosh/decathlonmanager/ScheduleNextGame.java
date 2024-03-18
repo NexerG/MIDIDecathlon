@@ -32,7 +32,7 @@ public class ScheduleNextGame
         scheduler=plugin.getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(plugin, new Runnable()
         {
-            float timer = 1f;//300f;
+            float timer = 10f;//300f;
             @Override
             public void run()
             {
@@ -47,16 +47,7 @@ public class ScheduleNextGame
                 {
                     if (what == "Chicken")
                     {
-                    /*for (int i = 0; i < man.getKomandos().getMasterTeam().GetKomandos().size(); i++)
-                    {
-                        for (int j = 0; j < man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.size(); j++)
-                        {
-                            Bukkit.getServer().dispatchCommand(
-                                    Bukkit.getServer().getConsoleSender()
-                                    , "mvtp " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " e:buildoff:"+String.valueOf(i*32+16)+",-59,16");
-                        }
-                    }*/
-                      //  man.getChicken().start();
+                      man.getChicken().start();
                     } else if (what == "TnTRun")
                     {
                     /*for(int i=0;i<man.getKomandos().getMasterTeam().GetKomandos().size();i++)
@@ -81,6 +72,30 @@ public class ScheduleNextGame
                             }
                         }
                         //man.getUhc().start();
+                    }else if (what == "HG")
+                    {
+                        for (int i = 0; i < man.getKomandos().getMasterTeam().GetKomandos().size(); i++)
+                        {
+                            for (int j = 0; j < man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.size(); j++)
+                            {
+                                Bukkit.getServer().dispatchCommand(
+                                        Bukkit.getServer().getConsoleSender()
+                                        , "mvtp " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " uhc");
+                            }
+                        }
+                        man.getHG().start();
+                    }else if (what == "Parkour")
+                    {
+                        for (int i = 0; i < man.getKomandos().getMasterTeam().GetKomandos().size(); i++)
+                        {
+                            for (int j = 0; j < man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.size(); j++)
+                            {
+                                Bukkit.getServer().dispatchCommand(
+                                        Bukkit.getServer().getConsoleSender()
+                                        , "mvtp " + man.getKomandos().getMasterTeam().GetKomandos().get(i).Players.get(j) + " SwagKour");
+                            }
+                        }
+                        man.getParkour().startgame();
                     }
                     bar.removeAll();
                     scheduler.cancelTasks(plugin);

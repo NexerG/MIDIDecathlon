@@ -31,7 +31,7 @@ public class Spawn extends SubCommandMaster{
         Collections.shuffle(listLocations);
 
         for(int i = 0; i <= 60; i++){
-            Location chestLoc = new Location(Bukkit.getWorld("world"), listLocations.get(i).getX(), listLocations.get(i).getY(), listLocations.get(i).getZ());
+            Location chestLoc = new Location(Bukkit.getWorld("Hungergames"), listLocations.get(i).getX(), listLocations.get(i).getY(), listLocations.get(i).getZ());
             chestLoc.getBlock().setType(Material.CHEST);
         }
     }
